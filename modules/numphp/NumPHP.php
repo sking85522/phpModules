@@ -24,6 +24,47 @@ use NumPHP\Statistics\Std;
 use NumPHP\Statistics\Var_ as VarAlias;
 use NumPHP\Statistics\Max;
 use NumPHP\Statistics\Min;
+use NumPHP\LinearAlgebra\Matmul;
+use NumPHP\ArrayManipulation\Reshape;
+use NumPHP\ArrayManipulation\Transpose;
+use NumPHP\ArrayManipulation\Flatten;
+use NumPHP\LinearAlgebra\Dot;
+use NumPHP\Random\Rand;
+use NumPHP\Random\Randn;
+use NumPHP\Random\Choice;
+use NumPHP\ArrayManipulation\Concatenate;
+use NumPHP\ArrayManipulation\Split;
+use NumPHP\ArrayManipulation\Vstack;
+use NumPHP\ArrayManipulation\Hstack;
+use NumPHP\LinearAlgebra\Determinant;
+use NumPHP\LinearAlgebra\Inverse;
+use NumPHP\Statistics\Sum;
+use NumPHP\Statistics\Prod;
+use NumPHP\Statistics\Argmax;
+use NumPHP\Statistics\Argmin;
+use NumPHP\Indexing\Where;
+use NumPHP\Math\Basic\Sqrt;
+use NumPHP\Math\Basic\Power;
+use NumPHP\Math\Basic\Abs;
+use NumPHP\Math\Trigonometry\Arcsin;
+use NumPHP\Math\Trigonometry\Arccos;
+use NumPHP\Math\Trigonometry\Arctan;
+use NumPHP\IO\Save;
+use NumPHP\IO\Load;
+use NumPHP\Sorting\Sort;
+use NumPHP\Math\Basic\Clip;
+use NumPHP\Math\Basic\Round;
+use NumPHP\Math\Basic\Floor;
+use NumPHP\Math\Basic\Ceil;
+use NumPHP\Math\Comparison\Equal;
+use NumPHP\Math\Comparison\NotEqual;
+use NumPHP\Math\Comparison\Greater;
+use NumPHP\Math\Comparison\GreaterEqual;
+use NumPHP\Math\Comparison\Less;
+use NumPHP\Math\Comparison\LessEqual;
+use NumPHP\Math\Logical\LogicalAnd;
+use NumPHP\Math\Logical\LogicalOr;
+use NumPHP\Math\Logical\LogicalNot;
 
 class NumPHP
 {
@@ -315,5 +356,469 @@ class NumPHP
     public static function min(NDArray $a)
     {
         return Min::min($a);
+    }
+
+    /**
+     * Matrix product of two arrays.
+     *
+     * @param NDArray $a
+     * @param NDArray $b
+     * @return NDArray
+     */
+    public static function matmul(NDArray $a, NDArray $b): NDArray
+    {
+        return Matmul::matmul($a, $b);
+    }
+
+    /**
+     * Gives a new shape to an array without changing its data.
+     *
+     * @param NDArray $a
+     * @param array $newShape
+     * @return NDArray
+     */
+    public static function reshape(NDArray $a, array $newShape): NDArray
+    {
+        return Reshape::reshape($a, $newShape);
+    }
+
+    /**
+     * Reverse or permute the axes of an array; returns the modified array.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function transpose(NDArray $a): NDArray
+    {
+        return Transpose::transpose($a);
+    }
+
+    /**
+     * Return a copy of the array collapsed into one dimension.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function flatten(NDArray $a): NDArray
+    {
+        return Flatten::flatten($a);
+    }
+
+    /**
+     * Random values in a given shape.
+     *
+     * @param array $shape
+     * @return NDArray
+     */
+    public static function rand(array $shape): NDArray
+    {
+        return Rand::rand($shape);
+    }
+
+    /**
+     * Return a sample (or samples) from the "standard normal" distribution.
+     *
+     * @param array $shape
+     * @return NDArray
+     */
+    public static function randn(array $shape): NDArray
+    {
+        return Randn::randn($shape);
+    }
+
+    /**
+     * Generates a random sample from a given 1-D array.
+     *
+     * @param mixed $a
+     * @param int|array|null $size
+     * @param bool $replace
+     * @param array|null $p
+     * @return NDArray
+     */
+    public static function choice($a, $size = null, bool $replace = true, array $p = null): NDArray
+    {
+        return Choice::choice($a, $size, $replace, $p);
+    }
+
+    /**
+     * Join a sequence of arrays along an existing axis.
+     *
+     * @param array $arrays Sequence of NDArrays
+     * @param int $axis
+     * @return NDArray
+     */
+    public static function concatenate(array $arrays, int $axis = 0): NDArray
+    {
+        return Concatenate::concatenate($arrays, $axis);
+    }
+
+    /**
+     * Split an array into multiple sub-arrays.
+     *
+     * @param NDArray $ary
+     * @param int|array $indices_or_sections
+     * @param int $axis
+     * @return array Array of NDArrays
+     */
+    public static function split(NDArray $ary, $indices_or_sections, int $axis = 0): array
+    {
+        return Split::split($ary, $indices_or_sections, $axis);
+    }
+
+    /**
+     * Compute the determinant of an array.
+     *
+     * @param NDArray $a
+     * @return float
+     */
+    public static function det(NDArray $a): float
+    {
+        return Determinant::det($a);
+    }
+
+    /**
+     * Compute the (multiplicative) inverse of a matrix.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function inv(NDArray $a): NDArray
+    {
+        return Inverse::inverse($a);
+    }
+
+    /**
+     * Sum of array elements.
+     *
+     * @param NDArray $a
+     * @return float
+     */
+    public static function sum(NDArray $a): float
+    {
+        return Sum::sum($a);
+    }
+
+    /**
+     * Return the product of array elements.
+     *
+     * @param NDArray $a
+     * @return float
+     */
+    public static function prod(NDArray $a): float
+    {
+        return Prod::prod($a);
+    }
+
+    /**
+     * Return elements chosen from x or y depending on condition.
+     *
+     * @param NDArray $condition
+     * @param mixed $x NDArray or scalar
+     * @param mixed $y NDArray or scalar
+     * @return NDArray
+     */
+    public static function where(NDArray $condition, $x, $y): NDArray
+    {
+        return Where::where($condition, $x, $y);
+    }
+
+    /**
+     * Dot product of two arrays.
+     *
+     * @param mixed $a NDArray or scalar
+     * @param mixed $b NDArray or scalar
+     * @return mixed Float/Int for vector dot, NDArray for matrix mul
+     */
+    public static function dot($a, $b)
+    {
+        return Dot::dot($a, $b);
+    }
+
+    /**
+     * Returns the indices of the maximum values along an axis.
+     *
+     * @param NDArray $a
+     * @return int
+     */
+    public static function argmax(NDArray $a): int
+    {
+        return Argmax::argmax($a);
+    }
+
+    /**
+     * Returns the indices of the minimum values along an axis.
+     *
+     * @param NDArray $a
+     * @return int
+     */
+    public static function argmin(NDArray $a): int
+    {
+        return Argmin::argmin($a);
+    }
+
+    /**
+     * Return the non-negative square-root of an array, element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function sqrt(NDArray $a): NDArray
+    {
+        return Sqrt::sqrt($a);
+    }
+
+    /**
+     * First array elements raised to powers from second array (or scalar), element-wise.
+     *
+     * @param NDArray $a
+     * @param mixed $exponent
+     * @return NDArray
+     */
+    public static function power(NDArray $a, $exponent): NDArray
+    {
+        return Power::power($a, $exponent);
+    }
+
+    /**
+     * Calculate the absolute value element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function abs(NDArray $a): NDArray
+    {
+        return Abs::abs($a);
+    }
+
+    /**
+     * Stack arrays in sequence vertically (row wise).
+     *
+     * @param array $tup Sequence of NDArrays.
+     * @return NDArray
+     */
+    public static function vstack(array $tup): NDArray
+    {
+        return Vstack::vstack($tup);
+    }
+
+    /**
+     * Stack arrays in sequence horizontally (column wise).
+     *
+     * @param array $tup Sequence of NDArrays.
+     * @return NDArray
+     */
+    public static function hstack(array $tup): NDArray
+    {
+        return Hstack::hstack($tup);
+    }
+
+    /**
+     * Inverse sine, element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function arcsin(NDArray $a): NDArray
+    {
+        return Arcsin::arcsin($a);
+    }
+
+    /**
+     * Inverse cosine, element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function arccos(NDArray $a): NDArray
+    {
+        return Arccos::arccos($a);
+    }
+
+    /**
+     * Inverse tangent, element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function arctan(NDArray $a): NDArray
+    {
+        return Arctan::arctan($a);
+    }
+
+    /**
+     * Save an array to a text file in JSON format.
+     *
+     * @param string $file
+     * @param NDArray $arr
+     */
+    public static function save(string $file, NDArray $arr): void
+    {
+        Save::save($file, $arr);
+    }
+
+    /**
+     * Load an array from a text file (JSON format).
+     *
+     * @param string $file
+     * @return NDArray
+     */
+    public static function load(string $file): NDArray
+    {
+        return Load::load($file);
+    }
+
+    /**
+     * Return a sorted copy of an array.
+     *
+     * @param NDArray $a
+     * @param int|null $axis Axis along which to sort. -1 means last axis. null means flatten.
+     * @return NDArray
+     */
+    public static function sort(NDArray $a, ?int $axis = -1): NDArray
+    {
+        return Sort::sort($a, $axis);
+    }
+
+    /**
+     * Clip (limit) the values in an array.
+     *
+     * @param NDArray $a
+     * @param float|int|null $min
+     * @param float|int|null $max
+     * @return NDArray
+     */
+    public static function clip(NDArray $a, $min, $max): NDArray
+    {
+        return Clip::clip($a, $min, $max);
+    }
+
+    /**
+     * Evenly round to the given number of decimals.
+     *
+     * @param NDArray $a
+     * @param int $decimals
+     * @return NDArray
+     */
+    public static function round(NDArray $a, int $decimals = 0): NDArray
+    {
+        return Round::round($a, $decimals);
+    }
+
+    /**
+     * Return the floor of the input, element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function floor(NDArray $a): NDArray
+    {
+        return Floor::floor($a);
+    }
+
+    /**
+     * Return the ceiling of the input, element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function ceil(NDArray $a): NDArray
+    {
+        return Ceil::ceil($a);
+    }
+
+    /**
+     * Return the truth value of (a == b) element-wise.
+     *
+     * @param NDArray $a
+     * @param mixed $b
+     * @return NDArray
+     */
+    public static function equal(NDArray $a, $b): NDArray
+    {
+        return Equal::equal($a, $b);
+    }
+
+    /**
+     * Return the truth value of (a != b) element-wise.
+     *
+     * @param NDArray $a
+     * @param mixed $b
+     * @return NDArray
+     */
+    public static function not_equal(NDArray $a, $b): NDArray
+    {
+        return NotEqual::not_equal($a, $b);
+    }
+
+    /**
+     * Return the truth value of (a > b) element-wise.
+     *
+     * @param NDArray $a
+     * @param mixed $b
+     * @return NDArray
+     */
+    public static function greater(NDArray $a, $b): NDArray
+    {
+        return Greater::greater($a, $b);
+    }
+
+    /**
+     * Return the truth value of (a >= b) element-wise.
+     *
+     * @param NDArray $a
+     * @param mixed $b
+     * @return NDArray
+     */
+    public static function greater_equal(NDArray $a, $b): NDArray
+    {
+        return GreaterEqual::greater_equal($a, $b);
+    }
+
+    /**
+     * Return the truth value of (a < b) element-wise.
+     *
+     * @param NDArray $a
+     * @param mixed $b
+     * @return NDArray
+     */
+    public static function less(NDArray $a, $b): NDArray
+    {
+        return Less::less($a, $b);
+    }
+
+    /**
+     * Return the truth value of (a <= b) element-wise.
+     *
+     * @param NDArray $a
+     * @param mixed $b
+     * @return NDArray
+     */
+    public static function less_equal(NDArray $a, $b): NDArray
+    {
+        return LessEqual::less_equal($a, $b);
+    }
+
+    /**
+     * Compute the truth value of a AND b element-wise.
+     *
+     * @param NDArray $a
+     * @param NDArray $b
+     * @return NDArray
+     */
+    public static function logical_and(NDArray $a, NDArray $b): NDArray
+    {
+        return LogicalAnd::logical_and($a, $b);
+    }
+
+    /**
+     * Compute the truth value of a OR b element-wise.
+     *
+     * @param NDArray $a
+     * @param NDArray $b
+     * @return NDArray
+     */
+    public static function logical_or(NDArray $a, NDArray $b): NDArray
+    {
+        return LogicalOr::logical_or($a, $b);
     }
 }
