@@ -3,30 +3,23 @@
 namespace NumPHP\Statistics;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Math\Basic\Sqrt;
 
 class Std
 {
-    public static function std(NDArray $a): float
+    /**
+     * Computes the standard deviation of an array.
+     *
+     * @param NDArray $a
+     * @param int|null $axis
+     * @return float|NDArray
+     */
+    public static function std(NDArray $a, ?int $axis = null)
     {
-        $data = $a->getData();
-        $flattened = self::flatten($data);
-        $mean = array_sum($flattened) / count($flattened);
-        $variance = 0;
-        foreach ($flattened as $value) {
-            $variance += pow($value - $mean, 2);
+        $variance = Var_::var($a, $axis);
+        if ($variance instanceof NDArray) {
+            return Sqrt::sqrt($variance);
         }
-        return sqrt($variance / count($flattened));
-    }
-
-    private static function flatten($data)
-    {
-        if (!is_array($data)) {
-            return [$data];
-        }
-        $result = [];
-        foreach ($data as $value) {
-            $result = array_merge($result, self::flatten($value));
-        }
-        return $result;
+        return sqrt($variance);
     }
 }
