@@ -3,18 +3,25 @@
 namespace NumPHP\Sets;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Intersect1D
 {
     /**
-     * intersect1d
+     * Find the intersection of two arrays.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $ar1
+     * @param NDArray $ar2
+     * @return NDArray
      */
-    public static function intersect1d(...$args)
+    public static function intersect1d(NDArray $ar1, NDArray $ar2): NDArray
     {
-        // TODO: Implement intersect1d
-        throw new \Exception("intersect1d not implemented yet.");
+        $data1 = Flatten::flatten($ar1)->getData();
+        $data2 = Flatten::flatten($ar2)->getData();
+
+        $intersection = array_intersect($data1, $data2);
+        sort($intersection);
+
+        return new NDArray(array_values($intersection));
     }
 }

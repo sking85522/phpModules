@@ -20,13 +20,13 @@ class Roll
         $data = Flatten::flatten($a)->getData();
         $count = count($data);
         if ($count === 0) {
-            return new NDArray([], $a->dtype());
+            return new NDArray([], $a->getDtype());
         }
 
         $shift = $shift % $count;
         if ($shift < 0) $shift += $count;
 
         $part2 = array_splice($data, 0, $count - $shift);
-        return new NDArray(array_merge($data, $part2), $a->dtype());
+        return new NDArray(array_merge($data, $part2), $a->getDtype());
     }
 }

@@ -10,7 +10,7 @@ class Flatten
     {
         $data = $a->getData();
         $flatData = self::recursiveFlatten($data);
-        return new NDArray($flatData, $a->dtype());
+        return new NDArray($flatData, $a->getDtype());
     }
 
     private static function recursiveFlatten($data): array

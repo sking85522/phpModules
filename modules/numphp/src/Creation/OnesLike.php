@@ -14,6 +14,6 @@ class OnesLike
      */
     public static function ones_like(NDArray $prototype): NDArray
     {
-        return ArrayCreate::ones($prototype->getShape(), $prototype->dtype());
+        return ArrayCreate::ones($prototype->getShape(), $prototype->getDtype());
     }
 }

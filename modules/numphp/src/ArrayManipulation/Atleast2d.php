@@ -14,7 +14,7 @@ class Atleast2d
      */
     public static function atleast_2d(NDArray $a): NDArray
     {
-        $ndim = $a->ndim();
+        $ndim = count($a->getShape());
         if ($ndim >= 2) {
             return $a;
         }

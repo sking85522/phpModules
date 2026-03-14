@@ -3,18 +3,27 @@
 namespace NumPHP\Math\Calculus;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Diff
 {
-    /**
-     * diff
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function diff(...$args)
+    public static function diff(NDArray $a, int $n = 1): NDArray
     {
-        // TODO: Implement diff
-        throw new \Exception("diff not implemented yet.");
+        $data = Flatten::flatten($a)->getData();
+        
+        for ($i = 0; $i < $n; $i++) {
+            $nextData = [];
+            $count = count($data);
+            if ($count <= 1) {
+                $data = [];
+                break;
+            }
+            for ($j = 0; $j < $count - 1; $j++) {
+                $nextData[] = $data[$j + 1] - $data[$j];
+            }
+            $data = $nextData;
+        }
+
+        return new NDArray($data, $a->getDtype());
     }
 }

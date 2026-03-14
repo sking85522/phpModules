@@ -18,7 +18,7 @@ class Clip
     {
         $data = $a->getData();
         $result = self::recursiveClip($data, $min, $max);
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 
     private static function recursiveClip($data, $min, $max)

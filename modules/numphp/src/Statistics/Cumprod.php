@@ -23,7 +23,7 @@ class Cumprod
 
         $flat = Flatten::flatten($a)->getData();
         if (!is_array($flat) || empty($flat)) {
-            return new NDArray($flat, $a->dtype());
+            return new NDArray($flat, $a->getDtype());
         }
 
         $prod = 1;
@@ -32,6 +32,6 @@ class Cumprod
             $prod *= $val;
             $result[] = $prod;
         }
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 }

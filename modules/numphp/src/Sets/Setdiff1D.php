@@ -3,18 +3,24 @@
 namespace NumPHP\Sets;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Setdiff1D
 {
     /**
-     * setdiff1d
+     * Find the set difference of two arrays.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $ar1
+     * @param NDArray $ar2
+     * @return NDArray
      */
-    public static function setdiff1d(...$args)
+    public static function setdiff1d(NDArray $ar1, NDArray $ar2): NDArray
     {
-        // TODO: Implement setdiff1d
-        throw new \Exception("setdiff1d not implemented yet.");
+        $data1 = Flatten::flatten($ar1)->getData();
+        $data2 = Flatten::flatten($ar2)->getData();
+
+        $difference = array_diff($data1, $data2);
+
+        return new NDArray(array_values($difference));
     }
 }

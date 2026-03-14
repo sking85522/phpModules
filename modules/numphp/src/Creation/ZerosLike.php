@@ -14,6 +14,6 @@ class ZerosLike
      */
     public static function zeros_like(NDArray $prototype): NDArray
     {
-        return ArrayCreate::zeros($prototype->getShape(), $prototype->dtype());
+        return ArrayCreate::zeros($prototype->getShape(), $prototype->getDtype());
     }
 }

@@ -16,7 +16,7 @@ class Nonzero
     public static function nonzero(NDArray $a): array
     {
         $argwhereResult = Argwhere::argwhere($a)->getData();
-        $ndim = $a->ndim();
+        $ndim = count($a->getShape());
         if ($ndim === 0) {
             return $a->getData() ? [new NDArray([0])] : [new NDArray([])];
         }

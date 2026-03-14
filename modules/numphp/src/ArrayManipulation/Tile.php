@@ -23,6 +23,6 @@ class Tile
             $result = array_merge($result, $data);
         }
 
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 }

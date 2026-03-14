@@ -11,16 +11,13 @@ class Nanmedian
      * Compute the median along the specified axis, while ignoring NaNs.
      *
      * @param NDArray $a
-     * @param int|null $axis
      * @return float
      */
-    public static function nanmedian(NDArray $a, ?int $axis = null): float
+    public static function nanmedian(NDArray $a): float
     {
-        if ($axis !== null) {
-            throw new \Exception("nanmedian with axis not implemented yet.");
-        }
         $data = Flatten::flatten($a)->getData();
         $filtered = array_values(array_filter($data, function($val) { return !is_nan($val); }));
+        
         if (empty($filtered)) {
             return NAN;
         }

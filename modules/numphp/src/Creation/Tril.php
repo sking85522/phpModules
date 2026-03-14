@@ -27,6 +27,6 @@ class Tril
             }
             $result[] = $newRow;
         }
-        return new NDArray($result, $m->dtype());
+        return new NDArray($result, $m->getDtype());
     }
 }

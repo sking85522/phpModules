@@ -23,7 +23,7 @@ class Cumsum
 
         $flat = Flatten::flatten($a)->getData();
         if (!is_array($flat) || empty($flat)) {
-            return new NDArray($flat, $a->dtype());
+            return new NDArray($flat, $a->getDtype());
         }
 
         $sum = 0;
@@ -32,6 +32,6 @@ class Cumsum
             $sum += $val;
             $result[] = $sum;
         }
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 }

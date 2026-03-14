@@ -7,14 +7,22 @@ use NumPHP\Core\NDArray;
 class Isfinite
 {
     /**
-     * isfinite
+     * Test element-wise for finiteness (not infinity or not Not a Number).
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $a
+     * @return NDArray
      */
-    public static function isfinite(...$args)
+    public static function isfinite(NDArray $a): NDArray
     {
-        // TODO: Implement isfinite
-        throw new \Exception("isfinite not implemented yet.");
+        $data = $a->getData();
+
+        $rec = function($item) use (&$rec) {
+            if (is_array($item)) {
+                return array_map($rec, $item);
+            }
+            return is_finite($item);
+        };
+
+        return new NDArray($rec($data), 'bool');
     }
 }

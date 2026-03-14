@@ -17,7 +17,7 @@ class Sign
     {
         $data = $a->getData();
         $result = self::recursiveSign($data);
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 
     private static function recursiveSign($data)

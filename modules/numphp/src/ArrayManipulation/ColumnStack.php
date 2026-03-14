@@ -15,7 +15,7 @@ class ColumnStack
     public static function column_stack(array $tup): NDArray
     {
         $reshaped = array_map(function($arr) {
-            return Reshape::reshape($arr, [$arr->size(), 1]);
+            return Reshape::reshape($arr, [array_product($arr->getShape()), 1]);
         }, $tup);
         return Hstack::hstack($reshaped);
     }

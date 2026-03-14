@@ -24,7 +24,7 @@ class Reshape
         // Reconstruct the array
         $reshapedData = self::buildShape($flatData, $newShape);
 
-        return new NDArray($reshapedData, $a->dtype());
+        return new NDArray($reshapedData, $a->getDtype());
     }
 
     private static function buildShape(array &$data, array $shape)

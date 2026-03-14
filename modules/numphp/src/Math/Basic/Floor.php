@@ -10,7 +10,7 @@ class Floor
     {
         $data = $a->getData();
         $result = self::recursiveFloor($data);
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 
     private static function recursiveFloor($data)

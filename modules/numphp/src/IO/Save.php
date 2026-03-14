@@ -6,15 +6,9 @@ use NumPHP\Core\NDArray;
 
 class Save
 {
-    /**
-     * save
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function save(...$args)
+    public static function save(string $file, NDArray $arr): void
     {
-        // TODO: Implement save
-        throw new \Exception("save not implemented yet.");
+        $data = ['shape' => $arr->getShape(), 'data' => $arr->getData(), 'dtype' => $arr->getDtype()];
+        file_put_contents($file, json_encode($data));
     }
 }

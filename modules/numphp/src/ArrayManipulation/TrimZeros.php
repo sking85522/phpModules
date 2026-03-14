@@ -38,6 +38,6 @@ class TrimZeros
             }
         }
         $sliced = array_slice($data, $first, $last - $first);
-        return new NDArray($sliced, $a->dtype());
+        return new NDArray($sliced, $a->getDtype());
     }
 }

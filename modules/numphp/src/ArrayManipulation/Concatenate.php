@@ -23,7 +23,7 @@ class Concatenate
         $first = $arrays[0];
         $baseShape = $first->getShape();
         $rank = count($baseShape);
-        $dtype = $first->dtype();
+        $dtype = $first->getDtype();
 
         // 1. Implementation for Axis 0 (Stacking rows/elements)
         if ($axis === 0) {

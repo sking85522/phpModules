@@ -27,6 +27,6 @@ class Repeat
             }
         }
 
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 }

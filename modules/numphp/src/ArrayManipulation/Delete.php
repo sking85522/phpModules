@@ -25,7 +25,7 @@ class Delete
                 unset($flat[$idx]);
             }
             
-            return new NDArray(array_values($flat), $arr->dtype());
+            return new NDArray(array_values($flat), $arr->getDtype());
         }
 
         throw new \Exception("Delete with specific axis not yet implemented.");

@@ -31,6 +31,6 @@ class Vander
             $result[] = $row;
         }
         
-        return new NDArray($result, $x->dtype());
+        return new NDArray($result, $x->getDtype());
     }
 }

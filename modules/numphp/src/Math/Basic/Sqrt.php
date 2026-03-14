@@ -10,7 +10,7 @@ class Sqrt
     {
         $data = $a->getData();
         $result = self::recursiveSqrt($data);
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 
     private static function recursiveSqrt($data)

@@ -10,13 +10,11 @@ class Nanstd
      * Compute the standard deviation along the specified axis, while ignoring NaNs.
      *
      * @param NDArray $a
-     * @param int|null $axis
      * @return float
      */
-    public static function nanstd(NDArray $a, ?int $axis = null): float
+    public static function nanstd(NDArray $a): float
     {
-        $variance = Nanvar::nanvar($a, $axis);
-
-        return sqrt($variance);
+        $var = Nanvar::nanvar($a);
+        return is_nan($var) ? NAN : sqrt($var);
     }
 }

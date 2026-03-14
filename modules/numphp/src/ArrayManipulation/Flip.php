@@ -21,25 +21,25 @@ class Flip
 
         // Case 1: 1D Array
         if (count($shape) === 1) {
-            return new NDArray(array_reverse($data), $m->dtype());
+            return new NDArray(array_reverse($data), $m->getDtype());
         }
 
         // Case 2: 2D Array
         if (count($shape) === 2) {
             // Axis 0: Flip rows (up/down)
             if ($axis === 0) {
-                return new NDArray(array_reverse($data), $m->dtype());
+                return new NDArray(array_reverse($data), $m->getDtype());
             }
             // Axis 1: Flip columns (left/right)
             if ($axis === 1) {
                 $newData = array_map('array_reverse', $data);
-                return new NDArray($newData, $m->dtype());
+                return new NDArray($newData, $m->getDtype());
             }
             // Axis null: Flip both
             if ($axis === null) {
                 $reversedRows = array_reverse($data);
                 $newData = array_map('array_reverse', $reversedRows);
-                return new NDArray($newData, $m->dtype());
+                return new NDArray($newData, $m->getDtype());
             }
         }
 

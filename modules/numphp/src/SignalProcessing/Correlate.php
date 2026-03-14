@@ -11,6 +11,6 @@ class Correlate
      */
     public static function correlate(NDArray $a, NDArray $v): NDArray
     {
-        return Convolve::convolve($a, array_reverse($v->getData()));
+        return Convolve::convolve($a, new NDArray(array_reverse($v->getData())));
     }
 }

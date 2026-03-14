@@ -7,14 +7,18 @@ use NumPHP\Core\NDArray;
 class LogicalNot
 {
     /**
-     * logical_not
+     * Compute the truth value of NOT x element-wise.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $a
+     * @return NDArray
      */
-    public static function logical_not(...$args)
+    public static function logical_not(NDArray $a): NDArray
     {
-        // TODO: Implement logical_not
-        throw new \Exception("logical_not not implemented yet.");
+        $data = $a->getData();
+        $rec = function($item) use (&$rec) {
+            if (is_array($item)) return array_map($rec, $item);
+            return !$item;
+        };
+        return new NDArray($rec($data), 'bool');
     }
 }

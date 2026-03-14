@@ -15,6 +15,6 @@ class FullLike
      */
     public static function full_like(NDArray $prototype, $fill_value): NDArray
     {
-        return ArrayCreate::full($prototype->getShape(), $fill_value, $prototype->dtype());
+        return ArrayCreate::full($prototype->getShape(), $fill_value, $prototype->getDtype());
     }
 }

@@ -24,7 +24,7 @@ class Insert
             
             array_splice($flat, $obj, 0, $valArr);
             
-            return new NDArray($flat, $arr->dtype());
+            return new NDArray($flat, $arr->getDtype());
         }
 
         throw new \Exception("Insert with specific axis not yet implemented.");

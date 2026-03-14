@@ -6,15 +6,12 @@ use NumPHP\Core\NDArray;
 
 class Dstack
 {
-    /**
-     * dstack
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function dstack(...$args)
+    public static function dstack(array $tup): NDArray
     {
-        // TODO: Implement dstack
-        throw new \Exception("dstack not implemented yet.");
+        $reshaped = array_map(function($arr) {
+            return Atleast3d::atleast_3d($arr);
+        }, $tup);
+        
+        return Concatenate::concatenate($reshaped, 2);
     }
 }

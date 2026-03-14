@@ -3,18 +3,26 @@
 namespace NumPHP\Math\Logical;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Any
 {
     /**
-     * any
+     * Test whether any array element along a given axis evaluates to True.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $a
+     * @return bool
      */
-    public static function any(...$args)
+    public static function any(NDArray $a): bool
     {
-        // TODO: Implement any
-        throw new \Exception("any not implemented yet.");
+        $data = Flatten::flatten($a)->getData();
+
+        foreach ($data as $element) {
+            if ($element) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

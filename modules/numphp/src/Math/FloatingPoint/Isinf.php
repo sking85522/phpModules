@@ -7,14 +7,22 @@ use NumPHP\Core\NDArray;
 class Isinf
 {
     /**
-     * isinf
+     * Test element-wise for positive or negative infinity.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $a
+     * @return NDArray
      */
-    public static function isinf(...$args)
+    public static function isinf(NDArray $a): NDArray
     {
-        // TODO: Implement isinf
-        throw new \Exception("isinf not implemented yet.");
+        $data = $a->getData();
+
+        $rec = function($item) use (&$rec) {
+            if (is_array($item)) {
+                return array_map($rec, $item);
+            }
+            return is_infinite($item);
+        };
+
+        return new NDArray($rec($data), 'bool');
     }
 }

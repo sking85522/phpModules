@@ -14,6 +14,6 @@ class EmptyLike
      */
     public static function empty_like(NDArray $prototype): NDArray
     {
-        return ArrayCreate::full($prototype->getShape(), null, $prototype->dtype());
+        return ArrayCreate::full($prototype->getShape(), null, $prototype->getDtype());
     }
 }

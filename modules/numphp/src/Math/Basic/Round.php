@@ -12,7 +12,7 @@ class Round
         $result = self::recursiveRound($data, $decimals);
         // Rounding often results in floats, but if decimals=0 it might be int conceptually.
         // Keeping original dtype or FLOAT usually safe.
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 
     private static function recursiveRound($data, int $decimals)

@@ -8,18 +8,15 @@ class Logspace
 {
     public static function logspace($start, $stop, $num = 50, $base = 10.0, $endpoint = true, $dtype = null): NDArray
     {
-        $data = [];
-        if ($endpoint) {
-            $step = ($stop - $start) / ($num - 1);
-            for ($i = 0; $i < $num; $i++) {
-                $data[] = pow($base, $start + ($i * $step));
-            }
-        } else {
-            $step = ($stop - $start) / $num;
-            for ($i = 0; $i < $num; $i++) {
-                $data[] = pow($base, $start + ($i * $step));
-            }
-        }
-        return new NDArray($data, $dtype);
+        $y = Linspace::linspace($start, $stop, $num, $endpoint, false, null);
+        $data = $y->getData();
+        
+        $powFunc = function($val) use ($base) {
+            return pow($base, $val);
+        };
+        
+        $result = array_map($powFunc, $data);
+        
+        return new NDArray($result, $dtype);
     }
 }

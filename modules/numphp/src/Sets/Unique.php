@@ -24,6 +24,6 @@ class Unique
         $unique = array_unique($data);
         sort($unique);
         
-        return new NDArray(array_values($unique), $a->dtype());
+        return new NDArray(array_values($unique), $a->getDtype());
     }
 }

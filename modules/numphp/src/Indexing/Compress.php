@@ -17,21 +17,15 @@ class Compress
      */
     public static function compress(NDArray $condition, NDArray $a, ?int $axis = null): NDArray
     {
-        if ($axis === null) {
-            $a = Flatten::flatten($a);
-            $condition = Flatten::flatten($condition);
-        }
+        $condData = Flatten::flatten($condition)->getData();
+        $arrData = Flatten::flatten($a)->getData();
 
-        $a_data = $a->getData();
-        $cond_data = $condition->getData();
         $result = [];
-
-        for ($i = 0; $i < count($a_data); $i++) {
-            if ($i < count($cond_data) && $cond_data[$i]) {
-                $result[] = $a_data[$i];
+        foreach ($arrData as $i => $val) {
+            if (isset($condData[$i]) && $condData[$i]) {
+                $result[] = $val;
             }
         }
-
-        return new NDArray($result);
+        return new NDArray($result, $a->getDtype());
     }
 }

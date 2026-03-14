@@ -23,6 +23,6 @@ class Nancumsum
             }
             $result[] = $sum;
         }
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 }

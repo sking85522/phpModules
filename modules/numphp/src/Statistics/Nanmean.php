@@ -11,23 +11,17 @@ class Nanmean
      * Compute the arithmetic mean along the specified axis, ignoring NaNs.
      *
      * @param NDArray $a
-     * @param int|null $axis
      * @return float
      */
-    public static function nanmean(NDArray $a, ?int $axis = null): float
+    public static function nanmean(NDArray $a): float
     {
-        if ($axis !== null) {
-            throw new \Exception("nanmean with axis not implemented yet.");
-        }
         $data = Flatten::flatten($a)->getData();
-        $sum = 0.0;
-        $count = 0;
-        foreach ($data as $val) {
-            if (!is_nan($val)) {
-                $sum += $val;
-                $count++;
-            }
+        $filtered = array_filter($data, function($val) { return !is_nan($val); });
+
+        if (empty($filtered)) {
+            return NAN;
         }
-        return ($count > 0) ? ($sum / $count) : NAN;
+
+        return array_sum($filtered) / count($filtered);
     }
 }

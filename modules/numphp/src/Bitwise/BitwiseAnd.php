@@ -6,26 +6,19 @@ use NumPHP\Core\NDArray;
 
 class BitwiseAnd
 {
-    /**
-     * Compute the bit-wise AND of two arrays element-wise.
-     *
-     * @param NDArray $a
-     * @param mixed $b
-     * @return NDArray
-     */
     public static function bitwise_and(NDArray $a, $b): NDArray
     {
-        $bData = ($b instanceof NDArray) ? $b->getData() : $b;
-        $result = self::recursiveOp($a->getData(), $bData);
-        return new NDArray($result, 'int');
-    }
+        $dataA = $a->getData();
+        $dataB = ($b instanceof NDArray) ? $b->getData() : $b;
 
-    private static function recursiveOp($d1, $d2)
-    {
-        if (is_array($d1)) {
-            $d2Arr = is_array($d2) ? $d2 : array_fill(0, count($d1), $d2);
-            return array_map([self::class, 'recursiveOp'], $d1, $d2Arr);
-        }
-        return (int)$d1 & (int)$d2;
+        $rec = function ($itemA, $itemB) use (&$rec) {
+            if (is_array($itemA)) {
+                $itemB_arr = is_array($itemB) ? $itemB : array_fill(0, count($itemA), $itemB);
+                return array_map($rec, $itemA, $itemB_arr);
+            }
+            return $itemA & $itemB;
+        };
+
+        return new NDArray($rec($dataA, $dataB), 'int');
     }
 }

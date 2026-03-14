@@ -10,7 +10,7 @@ class Power
     {
         $data = $a->getData();
         $result = self::recursivePower($data, $exponent);
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 
     private static function recursivePower($data, $exponent)

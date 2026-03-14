@@ -25,7 +25,7 @@ class Split
 
         $total = $shape[0];
         $sections = [];
-        $dtype = $ary->dtype();
+        $dtype = $ary->getDtype();
 
         if (is_int($indices_or_sections)) {
             $n = $indices_or_sections;

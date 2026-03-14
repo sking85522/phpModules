@@ -14,7 +14,7 @@ class Atleast1d
      */
     public static function atleast_1d(NDArray $a): NDArray
     {
-        if ($a->ndim() >= 1) {
+        if (count($a->getShape()) >= 1) {
             return $a;
         }
         return new NDArray([$a->getData()]);

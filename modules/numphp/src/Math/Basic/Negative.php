@@ -16,7 +16,7 @@ class Negative
     {
         $data = $a->getData();
         $result = self::recursiveNegative($data);
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDtype());
     }
 
     private static function recursiveNegative($data)

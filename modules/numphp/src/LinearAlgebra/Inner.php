@@ -16,7 +16,7 @@ class Inner
     public static function inner(NDArray $a, NDArray $b)
     {
         // For 1D arrays, inner product is dot product
-        if ($a->ndim() === 1 && $b->ndim() === 1) {
+        if (count($a->getShape()) === 1 && count($b->getShape()) === 1) {
              return Dot::dot($a, $b);
         }
         // For higher dimensions, sum product over the last axes

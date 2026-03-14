@@ -14,7 +14,7 @@ class Atleast3d
      */
     public static function atleast_3d(NDArray $a): NDArray
     {
-        $ndim = $a->ndim();
+        $ndim = count($a->getShape());
         if ($ndim >= 3) {
             return $a;
         }

@@ -1,7 +1,6 @@
 <?php
 
 namespace NumPHP\ArrayManipulation;
-
 use NumPHP\Core\NDArray;
 
 class Vsplit
@@ -13,8 +12,7 @@ class Vsplit
      * @param int|array $indices_or_sections
      * @return array
      */
-    public static function vsplit(NDArray $ary, $indices_or_sections): array
-    {
+    public static function vsplit(NDArray $ary, $indices_or_sections): array {
         return Split::split($ary, $indices_or_sections, 0);
     }
 }

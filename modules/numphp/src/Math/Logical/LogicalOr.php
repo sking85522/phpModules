@@ -7,14 +7,20 @@ use NumPHP\Core\NDArray;
 class LogicalOr
 {
     /**
-     * logical_or
+     * Compute the truth value of a OR b element-wise.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $a
+     * @param NDArray $b
+     * @return NDArray
      */
-    public static function logical_or(...$args)
+    public static function logical_or(NDArray $a, NDArray $b): NDArray
     {
-        // TODO: Implement logical_or
-        throw new \Exception("logical_or not implemented yet.");
+        $d1 = $a->getData();
+        $d2 = $b->getData();
+        $rec = function($item1, $item2) use (&$rec) {
+            if (is_array($item1)) return array_map($rec, $item1, $item2);
+            return $item1 || $item2;
+        };
+        return new NDArray($rec($d1, $d2), 'bool');
     }
 }

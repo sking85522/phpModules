@@ -15,6 +15,9 @@ class Hsplit
      */
     public static function hsplit(NDArray $ary, $indices_or_sections): array
     {
-        return Split::split($ary, $indices_or_sections, 1);
+        if (count($ary->getShape()) <= 1) {
+            return Split::split($ary, $indices_or_sections, 0);
+        }
+       return Split::split($ary, $indices_or_sections, 1);
     }
 }

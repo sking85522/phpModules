@@ -31,7 +31,7 @@ class Diag
             for ($i = 0; $i < $n; $i++) {
                 $res[$i][$i] = $data[$i];
             }
-            return new NDArray($res, $v->dtype());
+            return new NDArray($res, $v->getDtype());
         }
 
         // Case 2: 2-D Array -> Extract diagonal
@@ -41,7 +41,7 @@ class Diag
             for ($i = 0; $i < $limit; $i++) {
                 $diag[] = $data[$i][$i];
             }
-            return new NDArray($diag, $v->dtype());
+            return new NDArray($diag, $v->getDtype());
         }
         
         throw new \InvalidArgumentException("Input must be 1-d or 2-d");
