@@ -13,7 +13,7 @@
 ## Implemented Functions (Category Wise)
 
 ### Creation
-- `array`, `zeros`, `ones`, `full`
+- `array`, `zeros`, `ones`, `full`, `identity`
 - `arange`, `linspace`, `logspace`
 
 ### Mathematics
@@ -58,7 +58,7 @@
 - **Sorting**: `sort`, `argsort`, `partition`, `argpartition`
 - **Sets**: `unique`, `intersect1d`, `setdiff1d`, `union1d`, `isin`
 - **Signal Processing**:
-    - **FFT**: `fft`, `ifft`, `fftshift`
+    - **FFT**: `fftshift`
     - **Window Functions**: `hamming`, `hanning`, `blackman`, `bartlett`
 - **String**: `char`, `capitalize`, `center`, `lower`, `upper`, `string_split`, `join`, `decode`, `encode`, `replace`, `strip`, `ljust`, `rjust`, `title`
 - **Types**: `can_cast`, `iscomplex`, `isreal`, `finfo`, `iinfo`, `isscalar`

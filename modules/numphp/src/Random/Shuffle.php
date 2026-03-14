@@ -7,14 +7,19 @@ use NumPHP\Core\NDArray;
 class Shuffle
 {
     /**
-     * shuffle
+     * Shuffle array in-place along the first axis.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $x
+     * @return void
      */
-    public static function shuffle(...$args)
+    public static function shuffle(NDArray $x): void
     {
-        // TODO: Implement shuffle
-        throw new \Exception("shuffle not implemented yet.");
+        $data = $x->getData();
+        if (!is_array($data)) {
+            return;
+        }
+
+        shuffle($data);
+        $x->setData($data);
     }
 }

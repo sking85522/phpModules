@@ -3,6 +3,7 @@
 namespace NumPHP\Types;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Creation\ArrayCreate;
 
 class IsReal
 {
@@ -15,6 +16,6 @@ class IsReal
     public static function isreal(NDArray $x): NDArray
     {
         // In pure PHP, all standard numbers are "real".
-        return \NumPHP\Creation\ArrayCreate::full($x->getShape(), true, 'bool');
+        return ArrayCreate::full($x->getShape(), true, 'bool');
     }
 }

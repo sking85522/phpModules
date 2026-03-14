@@ -6,15 +6,22 @@ use NumPHP\Core\NDArray;
 
 class Arctan
 {
-    /**
-     * arctan
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function arctan(...$args)
+    public static function arctan(NDArray $a): NDArray
     {
-        // TODO: Implement arctan
-        throw new \Exception("arctan not implemented yet.");
+        $data = $a->getData();
+        $resultData = self::recursiveAtan($data);
+        return new NDArray($resultData);
+    }
+
+    private static function recursiveAtan($data)
+    {
+        if (is_array($data)) {
+            $result = [];
+            foreach ($data as $value) {
+                $result[] = self::recursiveAtan($value);
+            }
+            return $result;
+        }
+        return atan($data);
     }
 }

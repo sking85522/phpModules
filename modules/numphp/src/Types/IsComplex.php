@@ -3,6 +3,7 @@
 namespace NumPHP\Types;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Creation\ArrayCreate;
 
 class IsComplex
 {
@@ -15,6 +16,6 @@ class IsComplex
     public static function iscomplex(NDArray $x): NDArray
     {
         // In pure PHP, we don't have a native complex type, so this is simplified.
-        return \NumPHP\Creation\ArrayCreate::full($x->getShape(), false, 'bool');
+        return ArrayCreate::full($x->getShape(), false, 'bool');
     }
 }

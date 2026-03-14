@@ -3,6 +3,7 @@
 namespace NumPHP\LinearAlgebra;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Transpose;
 
 class Lstsq
 {
@@ -18,7 +19,7 @@ class Lstsq
     public static function lstsq(NDArray $a, NDArray $b): NDArray
     {
         // Calculate A Transpose
-        $aT = \NumPHP\ArrayManipulation\Transpose::transpose($a);
+        $aT = Transpose::transpose($a);
 
         // Calculate A.T * A
         $aTa = Matmul::matmul($aT, $a);

@@ -7,14 +7,34 @@ use NumPHP\Core\NDArray;
 class Permutation
 {
     /**
-     * permutation
+     * Return a permuted sequence or range.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param int|NDArray|array $x
+     * @return NDArray
      */
-    public static function permutation(...$args)
+    public static function permutation($x): NDArray
     {
-        // TODO: Implement permutation
-        throw new \Exception("permutation not implemented yet.");
+        if (is_int($x)) {
+            if ($x < 0) {
+                throw new \InvalidArgumentException("x must be non-negative.");
+            }
+            $data = range(0, $x - 1);
+            shuffle($data);
+            return new NDArray($data, 'int');
+        }
+
+        if ($x instanceof NDArray) {
+            $data = $x->getData();
+        } else {
+            $data = $x;
+        }
+
+        if (!is_array($data)) {
+            return new NDArray([$data]);
+        }
+
+        $copy = $data;
+        shuffle($copy);
+        return new NDArray($copy);
     }
 }

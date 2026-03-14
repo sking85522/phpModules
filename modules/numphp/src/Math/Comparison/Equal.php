@@ -7,14 +7,25 @@ use NumPHP\Core\NDArray;
 class Equal
 {
     /**
-     * equal
+     * Return the truth value of (a == b) element-wise.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param NDArray $a
+     * @param mixed $b Can be NDArray or scalar
+     * @return NDArray
      */
-    public static function equal(...$args)
+    public static function equal(NDArray $a, $b): NDArray
     {
-        // TODO: Implement equal
-        throw new \Exception("equal not implemented yet.");
+        $dataA = $a->getData();
+        $dataB = ($b instanceof NDArray) ? $b->getData() : $b;
+
+        $rec = function($itemA, $itemB) use (&$rec) {
+            if (is_array($itemA)) {
+                $itemB_arr = is_array($itemB) ? $itemB : array_fill(0, count($itemA), $itemB);
+                return array_map($rec, $itemA, $itemB_arr);
+            }
+            return $itemA == $itemB;
+        };
+
+        return new NDArray($rec($dataA, $dataB), 'bool');
     }
 }

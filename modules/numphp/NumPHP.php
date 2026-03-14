@@ -1,6 +1,6 @@
 <?php
 
-require_once 'autoload.php';
+namespace NumPHP;
 
 use NumPHP\Core\NDArray;
 use NumPHP\Creation\ArrayCreate;
@@ -48,6 +48,7 @@ use NumPHP\Math\Basic\Power;
 use NumPHP\Math\Basic\Abs;
 use NumPHP\Math\Trigonometry\Arcsin;
 use NumPHP\Math\Trigonometry\Arccos;
+use NumPHP\Math\Basic\Cube;
 use NumPHP\Math\Trigonometry\Arctan;
 use NumPHP\IO\Save;
 use NumPHP\IO\Load;
@@ -84,9 +85,9 @@ use NumPHP\Statistics\Cumsum;
 use NumPHP\Statistics\Cumprod;
 use NumPHP\ArrayManipulation\ExpandDims;
 use NumPHP\ArrayManipulation\Squeeze;
-use NumPHP\Math\FloatingPoint\IsNan;
-use NumPHP\Math\FloatingPoint\IsInf;
-use NumPHP\Math\FloatingPoint\IsFinite;
+use NumPHP\Math\FloatingPoint\Isnan;
+use NumPHP\Math\FloatingPoint\Isinf;
+use NumPHP\Math\FloatingPoint\Isfinite;
 use NumPHP\Math\Calculus\Diff;
 use NumPHP\LinearAlgebra\Norm;
 use NumPHP\LinearAlgebra\Solve;
@@ -191,6 +192,41 @@ use NumPHP\String\Ljust;
 use NumPHP\String\Rjust;
 use NumPHP\String\Title;
 use NumPHP\Indexing\Select;
+use NumPHP\Math\Hyperbolic\Arcsinh;
+use NumPHP\Math\Hyperbolic\Arccosh;
+use NumPHP\Math\Hyperbolic\Arctanh;
+use NumPHP\Math\Basic\Sinc;
+use NumPHP\Math\Basic\Heaviside;
+use NumPHP\Math\Basic\Maximum;
+use NumPHP\Math\Basic\Minimum;
+use NumPHP\Creation\Tri;
+use NumPHP\Creation\Tril;
+use NumPHP\Creation\Triu;
+use NumPHP\Creation\Vander;
+use NumPHP\Creation\Geomspace;
+use NumPHP\Math\Comparison\IsClose;
+use NumPHP\Math\Comparison\AllClose;
+use NumPHP\LinearAlgebra\MatrixPower;
+use NumPHP\LinearAlgebra\Inner;
+use NumPHP\LinearAlgebra\Outer;
+use NumPHP\SignalProcessing\Convolve;
+use NumPHP\SignalProcessing\Correlate;
+use NumPHP\Math\Calculus\Trapezoid;
+use NumPHP\ArrayManipulation\Block;
+use NumPHP\ArrayManipulation\Dsplit;
+use NumPHP\ArrayManipulation\Dstack;
+use NumPHP\Indexing\FillDiagonal;
+use NumPHP\Sorting\Lexsort;
+use NumPHP\LinearAlgebra\Eig;
+use NumPHP\LinearAlgebra\Svd;
+use NumPHP\LinearAlgebra\Qr;
+use NumPHP\Random\Seed;
+use NumPHP\Random\Shuffle;
+use NumPHP\Random\Permutation;
+use NumPHP\IO\Fromfunction;
+
+
+use NumPHP\IO\Fromiter;
 
 
 
@@ -572,7 +608,10 @@ class NumPHP
     public static function choice($a, $size = null, bool $replace = true, array $p = null): NDArray
     {
         return Choice::choice($a, $size, $replace, $p);
+
     }
+
+
 
     /**
      * Join a sequence of arrays along an existing axis.
@@ -781,6 +820,17 @@ class NumPHP
     }
 
     /**
+     * Cubes of x, element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function cube(NDArray $a): NDArray
+    {
+        return Cube::cube($a);
+    }
+
+    /**
      * Save an array to a text file in JSON format.
      *
      * @param string $file
@@ -958,6 +1008,17 @@ class NumPHP
     }
 
     /**
+     * Compute the truth value of NOT x element-wise.
+     *
+     * @param NDArray $a
+     * @return NDArray
+     */
+    public static function logical_not(NDArray $a): NDArray
+    {
+        return LogicalNot::logical_not($a);
+    }
+
+    /**
      * Returns an element-wise indication of the sign of a number.
      *
      * @param NDArray $a
@@ -1059,6 +1120,11 @@ class NumPHP
     {
         return All::all($a);
     }
+
+
+
+
+
 
     /**
      * Test whether any array element along a given axis evaluates to True.
@@ -1182,7 +1248,7 @@ class NumPHP
      */
     public static function isnan(NDArray $a): NDArray
     {
-        return IsNan::isnan($a);
+        return Isnan::isnan($a);
     }
 
     /**
@@ -1193,7 +1259,7 @@ class NumPHP
      */
     public static function isinf(NDArray $a): NDArray
     {
-        return IsInf::isinf($a);
+        return Isinf::isinf($a);
     }
 
     /**
@@ -1204,7 +1270,7 @@ class NumPHP
      */
     public static function isfinite(NDArray $a): NDArray
     {
-        return IsFinite::isfinite($a);
+        return Isfinite::isfinite($a);
     }
 
     /**
@@ -1678,6 +1744,18 @@ class NumPHP
     }
 
     /**
+     * Compute the floating-point remainder of division, element-wise.
+     *
+     * @param NDArray $x1
+     * @param NDArray $x2
+     * @return NDArray
+     */
+    public static function fmod(NDArray $x1, NDArray $x2): NDArray
+    {
+        return Fmod::fmod($x1, $x2);
+    }
+
+    /**
      * Compute the bit-wise AND of two arrays element-wise.
      *
      * @param NDArray $a
@@ -1938,6 +2016,17 @@ class NumPHP
     }
 
     /**
+     * Return the sum of array elements, treating NaNs as zero.
+     *
+     * @param NDArray $a
+     * @return mixed
+     */
+    public static function nansum(NDArray $a)
+    {
+        return Nansum::nansum($a);
+    }
+
+    /**
      * Return the minimum of an array, ignoring NaNs.
      *
      * @param NDArray $a
@@ -1959,6 +2048,18 @@ class NumPHP
     public static function nanmax(NDArray $a, ?int $axis = null)
     {
         return Nanmax::nanmax($a, $axis);
+    }
+
+    /**
+     * Compute the arithmetic mean, ignoring NaNs.
+     *
+     * @param NDArray $a
+     * @param int|null $axis
+     * @return float
+     */
+    public static function nanmean(NDArray $a, ?int $axis = null): float
+    {
+        return Nanmean::nanmean($a, $axis);
     }
 
     /**
@@ -2514,5 +2615,69 @@ class NumPHP
     public static function trapezoid(NDArray $y, ?NDArray $x = null, float $dx = 1.0): float
     {
         return Trapezoid::trapezoid($y, $x, $dx);
+    }
+
+    public static function block(array $arrays): NDArray
+    {
+        return Block::block($arrays);
+    }
+
+    public static function dsplit(NDArray $ary, $indices_or_sections): array
+    {
+        return Dsplit::dsplit($ary, $indices_or_sections);
+    }
+
+    public static function dstack(array $tup): NDArray
+    {
+        return Dstack::dstack($tup);
+    }
+
+    public static function fill_diagonal(NDArray &$a, $val): void
+    {
+        FillDiagonal::fill_diagonal($a, $val);
+    }
+
+    public static function lexsort(array $keys): NDArray
+    {
+        return Lexsort::lexsort($keys);
+    }
+
+    public static function eig(...$args)
+    {
+        return Eig::eig(...$args);
+    }
+
+    public static function svd(...$args)
+    {
+        return Svd::svd(...$args);
+    }
+
+    public static function qr(...$args)
+    {
+        return Qr::qr(...$args);
+    }
+
+    public static function seed(?int $seed = null): void
+    {
+        Seed::seed($seed);
+    }
+
+    public static function shuffle(NDArray &$x): void
+    {
+        Shuffle::shuffle($x);
+    }
+
+    public static function permutation($x): NDArray
+    {
+        return Permutation::permutation($x);
+    }
+
+    public static function fromfunction(callable $function, array $shape): NDArray
+    {
+        return Fromfunction::fromfunction($function, $shape);
+    }
+    public static function fromiter(iterable $iterable, string $dtype = null, ?int $count = null): NDArray
+    {
+        return Fromiter::fromiter($iterable, $dtype, $count);
     }
 }

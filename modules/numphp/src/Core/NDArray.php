@@ -11,6 +11,10 @@ class NDArray
 
     public function __construct($data, $dtype = null)
     {
+        if (!is_array($data) && !is_numeric($data)) {
+            throw new \InvalidArgumentException("Data must be an array or a number.");
+        }
+
         $this->data = $data;
         $this->shape = $this->calculateShape($data);
         $this->size = $this->calculateSize($this->shape);
@@ -19,7 +23,7 @@ class NDArray
 
     private function calculateShape($data)
     {
-        if (!is_array($data)) {
+        if (!is_array($data) ) {
             return [];
         }
 
@@ -40,13 +44,19 @@ class NDArray
         return array_product($shape);
     }
 
+    private function isHomogeneousArray(array $arr): bool {
+        if (empty($arr)) return true;
+        $firstType = gettype($arr[0]);
+        foreach ($arr as $item) {
+            if (gettype($item) !== $firstType) return false;
+            if (is_array($item) && !$this->isHomogeneousArray($item)) return false;
+        }
+        return true;
+    }
+
     private function detectDType($data)
     {
-        if (is_int($data)) {
-            return 'int';
-        }
-        if (is_float($data)) {
-            return 'float';
+       if (is_numeric($data)) {
         }
         if (is_bool($data)) {
             return 'bool';
@@ -94,6 +104,19 @@ class NDArray
     public function getSize()
     {
         return $this->size;
+    }
+
+    public function ndim(): int
+    {
+        return count($this->shape);
+    }
+
+    public function setData($data): void
+    {
+        $this->data = $data;
+        $this->shape = $this->calculateShape($data);
+        $this->size = $this->calculateSize($this->shape);
+        $this->dtype = $this->detectDType($data);
     }
 
     public function __toString()

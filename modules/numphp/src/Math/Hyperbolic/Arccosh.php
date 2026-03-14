@@ -1,6 +1,6 @@
 <?php
 
-namespace NumPHP\Math\Trigonometry;
+namespace NumPHP\Math\Hyperbolic;
 
 use NumPHP\Core\NDArray;
 

@@ -6,15 +6,22 @@ use NumPHP\Core\NDArray;
 
 class Arccos
 {
-    /**
-     * arccos
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function arccos(...$args)
+    public static function arccos(NDArray $a): NDArray
     {
-        // TODO: Implement arccos
-        throw new \Exception("arccos not implemented yet.");
+        $data = $a->getData();
+        $resultData = self::recursiveAcos($data);
+        return new NDArray($resultData);
+    }
+
+    private static function recursiveAcos($data)
+    {
+        if (is_array($data)) {
+            $result = [];
+            foreach ($data as $value) {
+                $result[] = self::recursiveAcos($value);
+            }
+            return $result;
+        }
+        return acos($data);
     }
 }

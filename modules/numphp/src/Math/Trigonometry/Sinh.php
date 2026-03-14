@@ -6,15 +6,22 @@ use NumPHP\Core\NDArray;
 
 class Sinh
 {
-    /**
-     * sinh
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function sinh(...$args)
+    public static function sinh(NDArray $a): NDArray
     {
-        // TODO: Implement sinh
-        throw new \Exception("sinh not implemented yet.");
+        $data = $a->getData();
+        $resultData = self::recursiveSinh($data);
+        return new NDArray($resultData);
+    }
+
+    private static function recursiveSinh($data)
+    {
+        if (is_array($data)) {
+            $result = [];
+            foreach ($data as $value) {
+                $result[] = self::recursiveSinh($value);
+            }
+            return $result;
+        }
+        return sinh($data);
     }
 }

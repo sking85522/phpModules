@@ -16,12 +16,27 @@ class Argsort
      */
     public static function argsort(NDArray $a, ?int $axis = -1): NDArray
     {
-        if ($axis === null || $a->ndim() < 2) {
+        $ndim = count($a->getShape());
+        if ($axis === null) {
+            $axis = -1;
+        }
+
+        if ($ndim <= 1) {
             $data = Flatten::flatten($a)->getData();
             asort($data);
             return new NDArray(array_keys($data), 'int');
         }
-        
-        throw new \Exception("argsort with axis for >1D not implemented yet.");
+
+        if ($ndim === 2 && ($axis === -1 || $axis === 1)) {
+            $result = [];
+            foreach ($a->getData() as $row) {
+                $indexed = $row;
+                asort($indexed);
+                $result[] = array_keys($indexed);
+            }
+            return new NDArray($result, 'int');
+        }
+
+        throw new \Exception("argsort with axis not implemented for this shape.");
     }
 }

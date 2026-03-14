@@ -7,14 +7,16 @@ use NumPHP\Core\NDArray;
 class Seed
 {
     /**
-     * seed
+     * Seed the random number generator.
      *
-     * @param mixed ...$args
-     * @return mixed
+     * @param int|null $seed
+     * @return void
      */
-    public static function seed(...$args)
+    public static function seed(?int $seed = null): void
     {
-        // TODO: Implement seed
-        throw new \Exception("seed not implemented yet.");
+        if ($seed === null) {
+            $seed = (int) (microtime(true) * 1000000);
+        }
+        mt_srand($seed);
     }
 }

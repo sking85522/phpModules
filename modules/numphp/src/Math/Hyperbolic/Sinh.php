@@ -1,27 +1,27 @@
 <?php
 
-namespace NumPHP\Math\Trigonometry;
+namespace NumPHP\Math\Hyperbolic;
 
 use NumPHP\Core\NDArray;
 
-class Tanh
+class Sinh
 {
-    public static function tanh(NDArray $a): NDArray
+    public static function sinh(NDArray $a): NDArray
     {
         $data = $a->getData();
-        $resultData = self::recursiveTanh($data);
+        $resultData = self::recursiveSinh($data);
         return new NDArray($resultData);
     }
 
-    private static function recursiveTanh($data)
+    private static function recursiveSinh($data)
     {
         if (is_array($data)) {
             $result = [];
             foreach ($data as $value) {
-                $result[] = self::recursiveTanh($value);
+                $result[] = self::recursiveSinh($value);
             }
             return $result;
         }
-        return tanh($data);
+        return sinh($data);
     }
 }

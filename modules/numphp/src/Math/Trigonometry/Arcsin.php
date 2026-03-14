@@ -6,15 +6,22 @@ use NumPHP\Core\NDArray;
 
 class Arcsin
 {
-    /**
-     * arcsin
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function arcsin(...$args)
+    public static function arcsin(NDArray $a): NDArray
     {
-        // TODO: Implement arcsin
-        throw new \Exception("arcsin not implemented yet.");
+        $data = $a->getData();
+        $resultData = self::recursiveAsin($data);
+        return new NDArray($resultData);
+    }
+
+    private static function recursiveAsin($data)
+    {
+        if (is_array($data)) {
+            $result = [];
+            foreach ($data as $value) {
+                $result[] = self::recursiveAsin($value);
+            }
+            return $result;
+        }
+        return asin($data);
     }
 }

@@ -32,6 +32,6 @@ class Transpose
             }
         }
 
-        return new NDArray($result, $a->getDtype());
+        return new NDArray($result, $a->getDType());
     }
 }
