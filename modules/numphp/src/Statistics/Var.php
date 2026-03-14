@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Var
 {
-    /**
-     * var
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function var(...$args)
+    public static function var(NDArray $a, ?int $axis = null)
     {
-        // TODO: Implement var
-        throw new \Exception("var not implemented yet.");
+        return Var_::var($a, $axis);
     }
 }

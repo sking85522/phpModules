@@ -6,15 +6,24 @@ use NumPHP\Core\NDArray;
 
 class PutAlongAxis
 {
-    /**
-     * put_along_axis
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function put_along_axis(...$args)
+    public static function put_along_axis(NDArray &$arr, NDArray $indices, NDArray $values, int $axis): void
     {
-        // TODO: Implement put_along_axis
-        throw new \Exception("put_along_axis not implemented yet.");
+        $data = $arr->getData();
+        $idx = $indices->getData();
+        $vals = $values->getData();
+        if ($axis === 1) {
+            foreach ($data as $i => $row) {
+                foreach ($idx[$i] as $j => $col) {
+                    $data[$i][$col] = $vals[$i][$j];
+                }
+            }
+        } else {
+            foreach ($idx as $i => $row) {
+                foreach ($row as $j => $r) {
+                    $data[$r][$j] = $vals[$i][$j];
+                }
+            }
+        }
+        $arr->setData($data);
     }
 }

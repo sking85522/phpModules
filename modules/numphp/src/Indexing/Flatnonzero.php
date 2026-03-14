@@ -3,18 +3,17 @@
 namespace NumPHP\Indexing;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Flatnonzero
 {
-    /**
-     * flatnonzero
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function flatnonzero(...$args)
+    public static function flatnonzero(NDArray $a): NDArray
     {
-        // TODO: Implement flatnonzero
-        throw new \Exception("flatnonzero not implemented yet.");
+        $data = Flatten::flatten($a)->getData();
+        $idx = [];
+        foreach ($data as $i => $v) {
+            if ($v) $idx[] = $i;
+        }
+        return new NDArray($idx, 'int');
     }
 }

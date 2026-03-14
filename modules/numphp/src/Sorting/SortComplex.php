@@ -6,15 +6,14 @@ use NumPHP\Core\NDArray;
 
 class SortComplex
 {
-    /**
-     * sort_complex
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function sort_complex(...$args)
+    public static function sort_complex(NDArray $a): NDArray
     {
-        // TODO: Implement sort_complex
-        throw new \Exception("sort_complex not implemented yet.");
+        $data = $a->getData();
+        if (!is_array($data)) {
+            return new NDArray([$data]);
+        }
+        $copy = $data;
+        sort($copy);
+        return new NDArray($copy);
     }
 }

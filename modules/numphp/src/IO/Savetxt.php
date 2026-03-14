@@ -15,7 +15,11 @@ class Savetxt
         }
 
         foreach ($data as $row) {
-            fputcsv($handle, $row, $delimiter);
+            if (!is_array($row)) {
+                fputcsv($handle, [$row], $delimiter);
+            } else {
+                fputcsv($handle, $row, $delimiter);
+            }
         }
 
         fclose($handle);

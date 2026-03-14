@@ -11,9 +11,41 @@ class Matmul
         $shapeA = $a->getShape();
         $shapeB = $b->getShape();
 
-        // Basic 2D matrix multiplication validation
+        $aData = $a->getData();
+        $bData = $b->getData();
+
+        // Handle 1D cases by promoting to 2D
+        if (count($shapeA) === 1 && count($shapeB) === 1) {
+            if ($shapeA[0] !== $shapeB[0]) {
+                throw new \InvalidArgumentException(
+                    sprintf("Shapes %s and %s not aligned: %d (dim 0) != %d (dim 0)",
+                        json_encode($shapeA), json_encode($shapeB), $shapeA[0], $shapeB[0])
+                );
+            }
+            $sum = 0;
+            for ($i = 0; $i < $shapeA[0]; $i++) {
+                $sum += $aData[$i] * $bData[$i];
+            }
+            return new NDArray([$sum]);
+        }
+
+        if (count($shapeA) === 1) {
+            // Treat A as row vector (1, n)
+            $a = new NDArray([$aData]);
+            $shapeA = $a->getShape();
+        }
+        if (count($shapeB) === 1) {
+            // Treat B as column vector (n, 1)
+            $col = [];
+            foreach ($bData as $val) {
+                $col[] = [$val];
+            }
+            $b = new NDArray($col);
+            $shapeB = $b->getShape();
+        }
+
         if (count($shapeA) !== 2 || count($shapeB) !== 2) {
-             throw new \InvalidArgumentException("Matmul currently supports 2D arrays only.");
+            throw new \InvalidArgumentException("Matmul currently supports 2D arrays only.");
         }
 
         if ($shapeA[1] !== $shapeB[0]) {

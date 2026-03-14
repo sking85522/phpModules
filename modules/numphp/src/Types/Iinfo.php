@@ -11,4 +11,5 @@ class Iinfo
             'min' => PHP_INT_MIN,
             'bits' => 64
         ];
+    }
 }

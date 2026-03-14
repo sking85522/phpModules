@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Shape
 {
-    /**
-     * shape
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function shape(...$args)
+    public static function shape(NDArray $a): array
     {
-        // TODO: Implement shape
-        throw new \Exception("shape not implemented yet.");
+        return $a->getShape();
     }
 }

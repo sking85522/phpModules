@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Moveaxis
 {
-    /**
-     * moveaxis
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function moveaxis(...$args)
+    public static function moveaxis(NDArray $a, int $source, int $destination): NDArray
     {
-        // TODO: Implement moveaxis
-        throw new \Exception("moveaxis not implemented yet.");
+        return Swapaxes::swapaxes($a, $source, $destination);
     }
 }

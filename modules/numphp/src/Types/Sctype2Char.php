@@ -2,19 +2,10 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class Sctype2Char
 {
-    /**
-     * sctype2char
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function sctype2char(...$args)
+    public static function sctype2char(string $dtype): string
     {
-        // TODO: Implement sctype2char
-        throw new \Exception("sctype2char not implemented yet.");
+        return $dtype === 'float' ? 'f' : ($dtype === 'bool' ? 'b' : 'i');
     }
 }

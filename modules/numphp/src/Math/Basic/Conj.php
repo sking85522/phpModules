@@ -3,18 +3,13 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Conj
 {
-    /**
-     * conj
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function conj(...$args)
+    public static function conj(NDArray $a): NDArray
     {
-        // TODO: Implement conj
-        throw new \Exception("conj not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return $x; });
+        return new NDArray($data);
     }
 }

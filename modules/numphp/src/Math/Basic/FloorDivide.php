@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class FloorDivide
 {
-    /**
-     * floor_divide
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function floor_divide(...$args)
+    public static function floor_divide(NDArray $a, $b): NDArray
     {
-        // TODO: Implement floor_divide
-        throw new \Exception("floor_divide not implemented yet.");
+        $data = Helpers::mapBinary($a->getData(), ($b instanceof NDArray) ? $b->getData() : $b, function ($x, $y) {
+            return floor($x / $y);
+        });
+        return new NDArray($data);
     }
 }

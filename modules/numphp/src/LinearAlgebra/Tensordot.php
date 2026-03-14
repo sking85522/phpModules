@@ -6,15 +6,11 @@ use NumPHP\Core\NDArray;
 
 class Tensordot
 {
-    /**
-     * tensordot
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function tensordot(...$args)
+    public static function tensordot(NDArray $a, NDArray $b, int $axes = 1)
     {
-        // TODO: Implement tensordot
-        throw new \Exception("tensordot not implemented yet.");
+        if ($axes === 1) {
+            return Matmul::matmul($a, $b);
+        }
+        throw new \Exception('tensordot only supports axes=1 in this implementation');
     }
 }

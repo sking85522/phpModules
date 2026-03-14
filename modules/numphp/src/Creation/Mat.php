@@ -6,15 +6,18 @@ use NumPHP\Core\NDArray;
 
 class Mat
 {
-    /**
-     * mat
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function mat(...$args)
+    public static function mat($data): NDArray
     {
-        // TODO: Implement mat
-        throw new \Exception("mat not implemented yet.");
+        if (is_string($data)) {
+            $rows = array_map('trim', explode(';', trim($data)));
+            $out = [];
+            foreach ($rows as $row) {
+                if ($row === '') continue;
+                $parts = preg_split('/\s+/', trim($row));
+                $out[] = array_map('floatval', $parts);
+            }
+            return new NDArray($out);
+        }
+        return new NDArray($data);
     }
 }

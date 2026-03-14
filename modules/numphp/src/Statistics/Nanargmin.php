@@ -3,18 +3,22 @@
 namespace NumPHP\Statistics;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Nanargmin
 {
-    /**
-     * nanargmin
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function nanargmin(...$args)
+    public static function nanargmin(NDArray $a)
     {
-        // TODO: Implement nanargmin
-        throw new \Exception("nanargmin not implemented yet.");
+        $data = Flatten::flatten($a)->getData();
+        $min = null;
+        $idx = -1;
+        foreach ($data as $i => $val) {
+            if (is_nan($val)) continue;
+            if ($min === null || $val < $min) {
+                $min = $val;
+                $idx = $i;
+            }
+        }
+        return $idx;
     }
 }

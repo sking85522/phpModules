@@ -15,6 +15,9 @@ class CanCast
      */
     public static function can_cast(string $from, string $to): bool
     {
-        return DType::canCast($from, $to);
+        if ($from === $to) return true;
+        if ($to === 'float' && in_array($from, ['int', 'bool'], true)) return true;
+        if ($to === 'int' && $from === 'bool') return true;
+        return false;
     }
 }

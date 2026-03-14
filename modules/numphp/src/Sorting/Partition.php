@@ -20,6 +20,6 @@ class Partition
         // For now, we return a fully sorted array.
         $data = Flatten::flatten($a)->getData();
         sort($data);
-        return new NDArray($data, $a->dtype());
+        return new NDArray($data, $a->getDType());
     }
 }

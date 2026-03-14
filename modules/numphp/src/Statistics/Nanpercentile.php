@@ -3,18 +3,15 @@
 namespace NumPHP\Statistics;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Nanpercentile
 {
-    /**
-     * nanpercentile
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function nanpercentile(...$args)
+    public static function nanpercentile(NDArray $a, float $q)
     {
-        // TODO: Implement nanpercentile
-        throw new \Exception("nanpercentile not implemented yet.");
+        $data = Flatten::flatten($a)->getData();
+        $filtered = array_values(array_filter($data, function ($v) { return !is_nan($v); }));
+        if (empty($filtered)) return NAN;
+        return Percentile::percentile(new NDArray($filtered), $q);
     }
 }

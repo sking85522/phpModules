@@ -2,19 +2,10 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class Issubclass
 {
-    /**
-     * issubclass_
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function issubclass(...$args)
+    public static function issubclass_(string $class, string $parent): bool
     {
-        // TODO: Implement issubclass_
-        throw new \Exception("issubclass_ not implemented yet.");
+        return is_subclass_of($class, $parent);
     }
 }

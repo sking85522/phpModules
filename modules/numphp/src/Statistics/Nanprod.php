@@ -3,18 +3,20 @@
 namespace NumPHP\Statistics;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Nanprod
 {
-    /**
-     * nanprod
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function nanprod(...$args)
+    public static function nanprod(NDArray $a)
     {
-        // TODO: Implement nanprod
-        throw new \Exception("nanprod not implemented yet.");
+        $data = Flatten::flatten($a)->getData();
+        $prod = 1.0;
+        $has = false;
+        foreach ($data as $val) {
+            if (is_nan($val)) continue;
+            $has = true;
+            $prod *= $val;
+        }
+        return $has ? $prod : NAN;
     }
 }

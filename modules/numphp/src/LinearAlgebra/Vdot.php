@@ -3,18 +3,19 @@
 namespace NumPHP\LinearAlgebra;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Vdot
 {
-    /**
-     * vdot
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function vdot(...$args)
+    public static function vdot(NDArray $a, NDArray $b): float
     {
-        // TODO: Implement vdot
-        throw new \Exception("vdot not implemented yet.");
+        $x = Flatten::flatten($a)->getData();
+        $y = Flatten::flatten($b)->getData();
+        $n = min(count($x), count($y));
+        $sum = 0.0;
+        for ($i = 0; $i < $n; $i++) {
+            $sum += $x[$i] * $y[$i];
+        }
+        return $sum;
     }
 }

@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Signbit
 {
-    /**
-     * signbit
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function signbit(...$args)
+    public static function signbit(NDArray $a): NDArray
     {
-        // TODO: Implement signbit
-        throw new \Exception("signbit not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) {
+            return is_nan($x) ? false : ($x < 0);
+        });
+        return new NDArray($data, 'bool');
     }
 }

@@ -6,15 +6,13 @@ use NumPHP\Core\NDArray;
 
 class Fliplr
 {
-    /**
-     * fliplr
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function fliplr(...$args)
+    public static function fliplr(NDArray $a): NDArray
     {
-        // TODO: Implement fliplr
-        throw new \Exception("fliplr not implemented yet.");
+        $data = $a->getData();
+        $out = [];
+        foreach ($data as $row) {
+            $out[] = array_reverse($row);
+        }
+        return new NDArray($out);
     }
 }

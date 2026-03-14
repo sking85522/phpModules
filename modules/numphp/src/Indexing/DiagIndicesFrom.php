@@ -6,15 +6,9 @@ use NumPHP\Core\NDArray;
 
 class DiagIndicesFrom
 {
-    /**
-     * diag_indices_from
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function diag_indices_from(...$args)
+    public static function diag_indices_from(NDArray $arr): array
     {
-        // TODO: Implement diag_indices_from
-        throw new \Exception("diag_indices_from not implemented yet.");
+        $shape = $arr->getShape();
+        return DiagIndices::diag_indices($shape[0]);
     }
 }

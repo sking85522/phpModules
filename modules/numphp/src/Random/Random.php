@@ -2,19 +2,10 @@
 
 namespace NumPHP\Random;
 
-use NumPHP\Core\NDArray;
-
 class Random
 {
-    /**
-     * random
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function random(...$args)
+    public static function random(): float
     {
-        // TODO: Implement random
-        throw new \Exception("random not implemented yet.");
+        return (float) mt_rand() / mt_getrandmax();
     }
 }

@@ -3,18 +3,13 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Real
 {
-    /**
-     * real
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function real(...$args)
+    public static function real(NDArray $a): NDArray
     {
-        // TODO: Implement real
-        throw new \Exception("real not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return $x; });
+        return new NDArray($data);
     }
 }

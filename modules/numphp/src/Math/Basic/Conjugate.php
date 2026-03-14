@@ -3,18 +3,13 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Conjugate
 {
-    /**
-     * conjugate
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function conjugate(...$args)
+    public static function conjugate(NDArray $a): NDArray
     {
-        // TODO: Implement conjugate
-        throw new \Exception("conjugate not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return $x; });
+        return new NDArray($data);
     }
 }

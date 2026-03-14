@@ -6,15 +6,12 @@ use NumPHP\Core\NDArray;
 
 class Setxor1D
 {
-    /**
-     * setxor1d
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function setxor1d(...$args)
+    public static function setxor1d(NDArray $ar1, NDArray $ar2): NDArray
     {
-        // TODO: Implement setxor1d
-        throw new \Exception("setxor1d not implemented yet.");
+        $a = array_values(array_unique($ar1->getData()));
+        $b = array_values(array_unique($ar2->getData()));
+        $out = array_values(array_merge(array_diff($a, $b), array_diff($b, $a)));
+        sort($out);
+        return new NDArray($out);
     }
 }

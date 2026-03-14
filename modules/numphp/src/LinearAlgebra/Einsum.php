@@ -6,15 +6,14 @@ use NumPHP\Core\NDArray;
 
 class Einsum
 {
-    /**
-     * einsum
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function einsum(...$args)
+    public static function einsum(string $subscripts, NDArray $a, NDArray $b = null)
     {
-        // TODO: Implement einsum
-        throw new \Exception("einsum not implemented yet.");
+        if ($subscripts === 'i,i->' && $b !== null) {
+            return Dot::dot($a, $b);
+        }
+        if ($subscripts === 'ij,jk->ik' && $b !== null) {
+            return Matmul::matmul($a, $b);
+        }
+        throw new \Exception('einsum pattern not supported in this implementation');
     }
 }

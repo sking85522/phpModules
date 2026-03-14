@@ -2,19 +2,10 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class Isdtype
 {
-    /**
-     * isdtype
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function isdtype(...$args)
+    public static function isdtype(string $dtype, string $kind): bool
     {
-        // TODO: Implement isdtype
-        throw new \Exception("isdtype not implemented yet.");
+        return $dtype === $kind;
     }
 }

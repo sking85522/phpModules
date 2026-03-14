@@ -6,15 +6,11 @@ use NumPHP\Core\NDArray;
 
 class Cond
 {
-    /**
-     * cond
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function cond(...$args)
+    public static function cond(NDArray $a): float
     {
-        // TODO: Implement cond
-        throw new \Exception("cond not implemented yet.");
+        $n1 = Norm::norm($a);
+        $inv = Inverse::inverse($a);
+        $n2 = Norm::norm($inv);
+        return $n1 * $n2;
     }
 }

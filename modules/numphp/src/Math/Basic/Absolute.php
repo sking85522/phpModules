@@ -3,18 +3,13 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Absolute
 {
-    /**
-     * absolute
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function absolute(...$args)
+    public static function absolute(NDArray $a): NDArray
     {
-        // TODO: Implement absolute
-        throw new \Exception("absolute not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return abs($x); });
+        return new NDArray($data);
     }
 }

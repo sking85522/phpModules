@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Cov
 {
-    /**
-     * cov
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function cov(...$args)
+    public static function cov(NDArray $m): NDArray
     {
-        // TODO: Implement cov
-        throw new \Exception("cov not implemented yet.");
+        return Covariance::cov($m);
     }
 }

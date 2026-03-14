@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Mod
 {
-    /**
-     * mod
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function mod(...$args)
+    public static function mod(NDArray $a, $b): NDArray
     {
-        // TODO: Implement mod
-        throw new \Exception("mod not implemented yet.");
+        $data = Helpers::mapBinary($a->getData(), ($b instanceof NDArray) ? $b->getData() : $b, function ($x, $y) {
+            return $x - floor($x / $y) * $y;
+        });
+        return new NDArray($data);
     }
 }

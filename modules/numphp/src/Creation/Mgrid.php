@@ -2,19 +2,10 @@
 
 namespace NumPHP\Creation;
 
-use NumPHP\Core\NDArray;
-
 class Mgrid
 {
-    /**
-     * mgrid
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function mgrid(...$args)
+    public static function mgrid(array $x, array $y): array
     {
-        // TODO: Implement mgrid
-        throw new \Exception("mgrid not implemented yet.");
+        return Meshgrid::meshgrid($x, $y);
     }
 }

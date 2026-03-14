@@ -2,19 +2,10 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class Issubdtype
 {
-    /**
-     * issubdtype
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function issubdtype(...$args)
+    public static function issubdtype(string $dtype, string $kind): bool
     {
-        // TODO: Implement issubdtype
-        throw new \Exception("issubdtype not implemented yet.");
+        return $dtype === $kind;
     }
 }

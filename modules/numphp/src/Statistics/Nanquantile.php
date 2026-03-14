@@ -3,18 +3,15 @@
 namespace NumPHP\Statistics;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Nanquantile
 {
-    /**
-     * nanquantile
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function nanquantile(...$args)
+    public static function nanquantile(NDArray $a, float $q)
     {
-        // TODO: Implement nanquantile
-        throw new \Exception("nanquantile not implemented yet.");
+        $data = Flatten::flatten($a)->getData();
+        $filtered = array_values(array_filter($data, function ($v) { return !is_nan($v); }));
+        if (empty($filtered)) return NAN;
+        return Quantile::quantile(new NDArray($filtered), $q);
     }
 }

@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Remainder
 {
-    /**
-     * remainder
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function remainder(...$args)
+    public static function remainder(NDArray $a, $b): NDArray
     {
-        // TODO: Implement remainder
-        throw new \Exception("remainder not implemented yet.");
+        $data = Helpers::mapBinary($a->getData(), ($b instanceof NDArray) ? $b->getData() : $b, function ($x, $y) {
+            return $x - floor($x / $y) * $y;
+        });
+        return new NDArray($data);
     }
 }

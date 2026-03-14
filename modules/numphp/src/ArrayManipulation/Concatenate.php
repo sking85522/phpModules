@@ -74,6 +74,24 @@ class Concatenate
             return new NDArray($resultData, $dtype);
         }
 
+        // 3. Implementation for Axis 2 - restricted to 3D for now
+        if ($axis === 2 && $rank === 3) {
+            $resultData = $first->getData();
+            $rows = $baseShape[0];
+            $cols = $baseShape[1];
+
+            for ($k = 1; $k < count($arrays); $k++) {
+                $nextArr = $arrays[$k];
+                $nextData = $nextArr->getData();
+                for ($i = 0; $i < $rows; $i++) {
+                    for ($j = 0; $j < $cols; $j++) {
+                        $resultData[$i][$j] = array_merge($resultData[$i][$j], $nextData[$i][$j]);
+                    }
+                }
+            }
+            return new NDArray($resultData, $dtype);
+        }
+
         throw new \Exception("Concatenation currently only implemented for axis 0 (all ranks) and axis 1 (rank 2).");
     }
 }

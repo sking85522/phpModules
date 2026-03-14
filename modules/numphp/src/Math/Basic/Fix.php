@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Fix
 {
-    /**
-     * fix
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function fix(...$args)
+    public static function fix(NDArray $a): NDArray
     {
-        // TODO: Implement fix
-        throw new \Exception("fix not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) {
+            return ($x >= 0) ? floor($x) : ceil($x);
+        });
+        return new NDArray($data);
     }
 }

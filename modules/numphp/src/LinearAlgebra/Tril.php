@@ -6,15 +6,19 @@ use NumPHP\Core\NDArray;
 
 class Tril
 {
-    /**
-     * tril
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function tril(...$args)
+    public static function tril(NDArray $m, int $k = 0): NDArray
     {
-        // TODO: Implement tril
-        throw new \Exception("tril not implemented yet.");
+        $data = $m->getData();
+        $rows = count($data);
+        $cols = count($data[0]);
+        $out = [];
+        for ($i = 0; $i < $rows; $i++) {
+            $row = [];
+            for ($j = 0; $j < $cols; $j++) {
+                $row[] = ($j <= $i + $k) ? $data[$i][$j] : 0;
+            }
+            $out[] = $row;
+        }
+        return new NDArray($out);
     }
 }

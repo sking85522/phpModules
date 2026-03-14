@@ -11,7 +11,24 @@ class FFT
      */
     public static function fft(NDArray $a): NDArray
     {
-        // A full FFT implementation is very complex.
-        throw new \Exception("fft is a placeholder and not fully implemented in pure PHP.");
+        $data = \NumPHP\ArrayManipulation\Flatten::flatten($a)->getData();
+        $n = count($data);
+        if ($n === 0) {
+            return new NDArray([]);
+        }
+
+        $out = [];
+        $twoPi = 2 * M_PI;
+        for ($k = 0; $k < $n; $k++) {
+            $real = 0.0;
+            $imag = 0.0;
+            for ($t = 0; $t < $n; $t++) {
+                $angle = $twoPi * $k * $t / $n;
+                $real += $data[$t] * cos($angle);
+                $imag -= $data[$t] * sin($angle);
+            }
+            $out[] = [$real, $imag];
+        }
+        return new NDArray($out);
     }
 }

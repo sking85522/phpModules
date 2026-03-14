@@ -3,18 +3,13 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Rad2Deg
 {
-    /**
-     * rad2deg
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function rad2deg(...$args)
+    public static function rad2deg(NDArray $a): NDArray
     {
-        // TODO: Implement rad2deg
-        throw new \Exception("rad2deg not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return $x * 180.0 / M_PI; });
+        return new NDArray($data);
     }
 }

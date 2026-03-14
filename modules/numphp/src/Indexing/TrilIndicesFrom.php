@@ -6,15 +6,9 @@ use NumPHP\Core\NDArray;
 
 class TrilIndicesFrom
 {
-    /**
-     * tril_indices_from
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function tril_indices_from(...$args)
+    public static function tril_indices_from(NDArray $arr, int $k = 0): array
     {
-        // TODO: Implement tril_indices_from
-        throw new \Exception("tril_indices_from not implemented yet.");
+        $shape = $arr->getShape();
+        return TrilIndices::tril_indices($shape[0], $k);
     }
 }

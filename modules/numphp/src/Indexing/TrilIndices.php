@@ -6,15 +6,18 @@ use NumPHP\Core\NDArray;
 
 class TrilIndices
 {
-    /**
-     * tril_indices
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function tril_indices(...$args)
+    public static function tril_indices(int $n, int $k = 0): array
     {
-        // TODO: Implement tril_indices
-        throw new \Exception("tril_indices not implemented yet.");
+        $rows = [];
+        $cols = [];
+        for ($i = 0; $i < $n; $i++) {
+            for ($j = 0; $j < $n; $j++) {
+                if ($j <= $i + $k) {
+                    $rows[] = $i;
+                    $cols[] = $j;
+                }
+            }
+        }
+        return [new NDArray($rows, 'int'), new NDArray($cols, 'int')];
     }
 }

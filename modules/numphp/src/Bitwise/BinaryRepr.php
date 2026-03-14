@@ -2,19 +2,14 @@
 
 namespace NumPHP\Bitwise;
 
-use NumPHP\Core\NDArray;
-
 class BinaryRepr
 {
-    /**
-     * binary_repr
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function binary_repr(...$args)
+    public static function binary_repr(int $num, ?int $width = null): string
     {
-        // TODO: Implement binary_repr
-        throw new \Exception("binary_repr not implemented yet.");
+        $s = decbin($num);
+        if ($width !== null) {
+            $s = str_pad($s, $width, '0', STR_PAD_LEFT);
+        }
+        return $s;
     }
 }

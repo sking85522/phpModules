@@ -3,18 +3,19 @@
 namespace NumPHP\ArrayManipulation;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class BroadcastTo
 {
-    /**
-     * broadcast_to
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function broadcast_to(...$args)
+    public static function broadcast_to(NDArray $a, array $shape): NDArray
     {
-        // TODO: Implement broadcast_to
-        throw new \Exception("broadcast_to not implemented yet.");
+        if ($a->getShape() === $shape) {
+            return $a;
+        }
+        if (empty($a->getShape())) {
+            $data = Helpers::buildFilled($shape, $a->getData());
+            return new NDArray($data);
+        }
+        throw new \Exception('broadcast_to not implemented for this shape');
     }
 }

@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Amin
 {
-    /**
-     * amin
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function amin(...$args)
+    public static function amin(NDArray $a, ?int $axis = null)
     {
-        // TODO: Implement amin
-        throw new \Exception("amin not implemented yet.");
+        return Min::min($a, $axis);
     }
 }

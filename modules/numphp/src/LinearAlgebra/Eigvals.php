@@ -6,15 +6,9 @@ use NumPHP\Core\NDArray;
 
 class Eigvals
 {
-    /**
-     * eigvals
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function eigvals(...$args)
+    public static function eigvals(NDArray $a): NDArray
     {
-        // TODO: Implement eigvals
-        throw new \Exception("eigvals not implemented yet.");
+        [$vals, $vecs] = Eig::eig($a);
+        return $vals;
     }
 }

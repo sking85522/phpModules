@@ -2,19 +2,10 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class Typename
 {
-    /**
-     * typename
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function typename(...$args)
+    public static function typename($obj): string
     {
-        // TODO: Implement typename
-        throw new \Exception("typename not implemented yet.");
+        return gettype($obj);
     }
 }

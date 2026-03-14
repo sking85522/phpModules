@@ -6,15 +6,9 @@ use NumPHP\Core\NDArray;
 
 class TriuIndicesFrom
 {
-    /**
-     * triu_indices_from
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function triu_indices_from(...$args)
+    public static function triu_indices_from(NDArray $arr, int $k = 0): array
     {
-        // TODO: Implement triu_indices_from
-        throw new \Exception("triu_indices_from not implemented yet.");
+        $shape = $arr->getShape();
+        return TriuIndices::triu_indices($shape[0], $k);
     }
 }

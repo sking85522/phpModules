@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class FloatPower
 {
-    /**
-     * float_power
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function float_power(...$args)
+    public static function float_power(NDArray $a, $b): NDArray
     {
-        // TODO: Implement float_power
-        throw new \Exception("float_power not implemented yet.");
+        $data = Helpers::mapBinary($a->getData(), ($b instanceof NDArray) ? $b->getData() : $b, function ($x, $y) {
+            return pow((float) $x, (float) $y);
+        });
+        return new NDArray($data);
     }
 }

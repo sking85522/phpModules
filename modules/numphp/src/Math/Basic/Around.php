@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Around
 {
-    /**
-     * around
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function around(...$args)
+    public static function around(NDArray $a, int $decimals = 0): NDArray
     {
-        // TODO: Implement around
-        throw new \Exception("around not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) use ($decimals) {
+            return round($x, $decimals);
+        });
+        return new NDArray($data);
     }
 }

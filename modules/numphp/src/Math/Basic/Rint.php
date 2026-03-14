@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Rint
 {
-    /**
-     * rint
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function rint(...$args)
+    public static function rint(NDArray $a): NDArray
     {
-        // TODO: Implement rint
-        throw new \Exception("rint not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) {
+            return round($x, 0, PHP_ROUND_HALF_EVEN);
+        });
+        return new NDArray($data);
     }
 }

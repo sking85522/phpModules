@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Rank
 {
-    /**
-     * rank
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function rank(...$args)
+    public static function rank(NDArray $a): int
     {
-        // TODO: Implement rank
-        throw new \Exception("rank not implemented yet.");
+        return count($a->getShape());
     }
 }

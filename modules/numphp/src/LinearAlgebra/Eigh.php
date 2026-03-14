@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Eigh
 {
-    /**
-     * eigh
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function eigh(...$args)
+    public static function eigh(NDArray $a): array
     {
-        // TODO: Implement eigh
-        throw new \Exception("eigh not implemented yet.");
+        return Eig::eig($a);
     }
 }

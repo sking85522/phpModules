@@ -3,18 +3,13 @@
 namespace NumPHP\Math\FloatingPoint;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Isneginf
 {
-    /**
-     * isneginf
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function isneginf(...$args)
+    public static function isneginf(NDArray $a): NDArray
     {
-        // TODO: Implement isneginf
-        throw new \Exception("isneginf not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return is_infinite($x) && $x < 0; });
+        return new NDArray($data, 'bool');
     }
 }

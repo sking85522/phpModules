@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Ogrid
 {
-    /**
-     * ogrid
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function ogrid(...$args)
+    public static function ogrid(array $x, array $y): array
     {
-        // TODO: Implement ogrid
-        throw new \Exception("ogrid not implemented yet.");
+        return [new NDArray($x), new NDArray($y)];
     }
 }

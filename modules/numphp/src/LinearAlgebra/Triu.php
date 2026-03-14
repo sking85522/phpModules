@@ -6,15 +6,22 @@ use NumPHP\Core\NDArray;
 
 class Triu
 {
-    /**
-     * triu
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function triu(...$args)
+    public static function triu(NDArray $m, int $k = 0): NDArray
     {
-        // TODO: Implement triu
-        throw new \Exception("triu not implemented yet.");
+        $data = $m->getData();
+        if (!is_array($data) || !is_array($data[0] ?? null)) {
+            return $m;
+        }
+        $rows = count($data);
+        $cols = count($data[0]);
+        $out = [];
+        for ($i = 0; $i < $rows; $i++) {
+            $row = [];
+            for ($j = 0; $j < $cols; $j++) {
+                $row[] = ($j >= $i + $k) ? $data[$i][$j] : 0;
+            }
+            $out[] = $row;
+        }
+        return new NDArray($out);
     }
 }

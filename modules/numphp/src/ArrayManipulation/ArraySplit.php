@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class ArraySplit
 {
-    /**
-     * array_split
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function array_split(...$args)
+    public static function array_split(NDArray $ary, $indices_or_sections): array
     {
-        // TODO: Implement array_split
-        throw new \Exception("array_split not implemented yet.");
+        return Split::split($ary, $indices_or_sections);
     }
 }

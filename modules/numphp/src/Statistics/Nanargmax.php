@@ -3,18 +3,22 @@
 namespace NumPHP\Statistics;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Flatten;
 
 class Nanargmax
 {
-    /**
-     * nanargmax
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function nanargmax(...$args)
+    public static function nanargmax(NDArray $a)
     {
-        // TODO: Implement nanargmax
-        throw new \Exception("nanargmax not implemented yet.");
+        $data = Flatten::flatten($a)->getData();
+        $max = null;
+        $idx = -1;
+        foreach ($data as $i => $val) {
+            if (is_nan($val)) continue;
+            if ($max === null || $val > $max) {
+                $max = $val;
+                $idx = $i;
+            }
+        }
+        return $idx;
     }
 }

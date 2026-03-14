@@ -2,19 +2,10 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class Obj2Sctype
 {
-    /**
-     * obj2sctype
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function obj2sctype(...$args)
+    public static function obj2sctype($obj): string
     {
-        // TODO: Implement obj2sctype
-        throw new \Exception("obj2sctype not implemented yet.");
+        return is_float($obj) ? 'float' : (is_bool($obj) ? 'bool' : 'int');
     }
 }

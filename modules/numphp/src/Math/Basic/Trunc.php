@@ -3,18 +3,15 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Trunc
 {
-    /**
-     * trunc
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function trunc(...$args)
+    public static function trunc(NDArray $a): NDArray
     {
-        // TODO: Implement trunc
-        throw new \Exception("trunc not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) {
+            return ($x >= 0) ? floor($x) : ceil($x);
+        });
+        return new NDArray($data);
     }
 }

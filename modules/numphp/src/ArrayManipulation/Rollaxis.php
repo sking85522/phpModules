@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Rollaxis
 {
-    /**
-     * rollaxis
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function rollaxis(...$args)
+    public static function rollaxis(NDArray $a, int $axis, int $start = 0): NDArray
     {
-        // TODO: Implement rollaxis
-        throw new \Exception("rollaxis not implemented yet.");
+        return Swapaxes::swapaxes($a, $axis, $start);
     }
 }

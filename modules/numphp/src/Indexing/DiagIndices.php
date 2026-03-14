@@ -6,15 +6,9 @@ use NumPHP\Core\NDArray;
 
 class DiagIndices
 {
-    /**
-     * diag_indices
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function diag_indices(...$args)
+    public static function diag_indices(int $n): array
     {
-        // TODO: Implement diag_indices
-        throw new \Exception("diag_indices not implemented yet.");
+        $idx = range(0, $n - 1);
+        return [new NDArray($idx, 'int'), new NDArray($idx, 'int')];
     }
 }

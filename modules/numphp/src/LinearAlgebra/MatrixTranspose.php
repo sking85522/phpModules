@@ -3,18 +3,12 @@
 namespace NumPHP\LinearAlgebra;
 
 use NumPHP\Core\NDArray;
+use NumPHP\ArrayManipulation\Transpose;
 
 class MatrixTranspose
 {
-    /**
-     * matrix_transpose
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function matrix_transpose(...$args)
+    public static function matrix_transpose(NDArray $a): NDArray
     {
-        // TODO: Implement matrix_transpose
-        throw new \Exception("matrix_transpose not implemented yet.");
+        return Transpose::transpose($a);
     }
 }

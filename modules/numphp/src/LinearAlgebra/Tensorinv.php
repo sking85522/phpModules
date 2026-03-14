@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Tensorinv
 {
-    /**
-     * tensorinv
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function tensorinv(...$args)
+    public static function tensorinv(NDArray $a): NDArray
     {
-        // TODO: Implement tensorinv
-        throw new \Exception("tensorinv not implemented yet.");
+        return Inverse::inverse($a);
     }
 }

@@ -6,15 +6,14 @@ use NumPHP\Core\NDArray;
 
 class Diagonal
 {
-    /**
-     * diagonal
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function diagonal(...$args)
+    public static function diagonal(NDArray $a): NDArray
     {
-        // TODO: Implement diagonal
-        throw new \Exception("diagonal not implemented yet.");
+        $data = $a->getData();
+        $n = min(count($data), count($data[0] ?? []));
+        $out = [];
+        for ($i = 0; $i < $n; $i++) {
+            $out[] = $data[$i][$i];
+        }
+        return new NDArray($out);
     }
 }

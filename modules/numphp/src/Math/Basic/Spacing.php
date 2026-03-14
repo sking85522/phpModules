@@ -3,18 +3,18 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Spacing
 {
-    /**
-     * spacing
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function spacing(...$args)
+    public static function spacing(NDArray $a): NDArray
     {
-        // TODO: Implement spacing
-        throw new \Exception("spacing not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) {
+            if ($x == 0.0) {
+                return PHP_FLOAT_MIN;
+            }
+            return abs($x) * PHP_FLOAT_EPSILON;
+        });
+        return new NDArray($data);
     }
 }

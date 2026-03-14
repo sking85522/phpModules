@@ -3,18 +3,17 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Fmax
 {
-    /**
-     * fmax
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function fmax(...$args)
+    public static function fmax(NDArray $a, $b): NDArray
     {
-        // TODO: Implement fmax
-        throw new \Exception("fmax not implemented yet.");
+        $data = Helpers::mapBinary($a->getData(), ($b instanceof NDArray) ? $b->getData() : $b, function ($x, $y) {
+            if (is_nan($x)) return $y;
+            if (is_nan($y)) return $x;
+            return ($x > $y) ? $x : $y;
+        });
+        return new NDArray($data);
     }
 }

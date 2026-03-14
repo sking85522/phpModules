@@ -88,6 +88,8 @@ use NumPHP\ArrayManipulation\Squeeze;
 use NumPHP\Math\FloatingPoint\Isnan;
 use NumPHP\Math\FloatingPoint\Isinf;
 use NumPHP\Math\FloatingPoint\Isfinite;
+use NumPHP\Math\FloatingPoint\Isneginf;
+use NumPHP\Math\FloatingPoint\Isposinf;
 use NumPHP\Math\Calculus\Diff;
 use NumPHP\LinearAlgebra\Norm;
 use NumPHP\LinearAlgebra\Solve;
@@ -96,6 +98,7 @@ use NumPHP\ArrayManipulation\Pad;
 use NumPHP\ArrayManipulation\Roll;
 use NumPHP\Sets\Intersect1D;
 use NumPHP\Sets\Setdiff1D;
+use NumPHP\Sets\Setxor1D;
 use NumPHP\Sets\Union1D;
 use NumPHP\LinearAlgebra\Kron;
 use NumPHP\Math\Calculus\Gradient;
@@ -227,6 +230,127 @@ use NumPHP\IO\Fromfunction;
 
 
 use NumPHP\IO\Fromiter;
+use NumPHP\Math\Basic\Absolute;
+use NumPHP\Math\Basic\Fix;
+use NumPHP\Math\Basic\Ldexp;
+use NumPHP\Math\Basic\Signbit;
+use NumPHP\Math\Basic\Spacing;
+use NumPHP\Math\Basic\Fmin;
+use NumPHP\Math\Basic\Fmax;
+use NumPHP\Math\Basic\Real;
+use NumPHP\Math\Basic\Imag;
+use NumPHP\Math\Basic\Conj;
+use NumPHP\Math\Basic\Conjugate;
+use NumPHP\Math\Basic\Remainder;
+use NumPHP\Math\Basic\FloorDivide;
+use NumPHP\Math\Basic\Trunc;
+use NumPHP\Math\Basic\Angle;
+use NumPHP\Math\Basic\Frexp;
+use NumPHP\Math\Basic\Mod;
+use NumPHP\Math\Basic\Around;
+use NumPHP\Math\Basic\Divmod;
+use NumPHP\Math\Basic\Rad2Deg;
+use NumPHP\Math\Basic\Deg2Rad;
+use NumPHP\Math\Basic\Modf;
+use NumPHP\Math\Basic\I0;
+use NumPHP\Math\Basic\Nextafter;
+use NumPHP\Math\Basic\Rint;
+use NumPHP\Math\Basic\FloatPower;
+use NumPHP\Math\Exponential\Exp2;
+use NumPHP\Math\Exponential\Logaddexp;
+use NumPHP\Math\Exponential\Logaddexp2;
+use NumPHP\Math\Comparison\ArrayEqual;
+use NumPHP\Math\Comparison\ArrayEquiv;
+use NumPHP\Math\Logical\LogicalXor;
+use NumPHP\Sorting\Msort;
+use NumPHP\Sorting\SortComplex;
+use NumPHP\Random\Random;
+use NumPHP\Random\Randint;
+use NumPHP\Creation\Empty_;
+use NumPHP\Creation\Array;
+use NumPHP\Creation\Mat;
+use NumPHP\Creation\Meshgrid;
+use NumPHP\Creation\Mgrid;
+use NumPHP\Creation\Ogrid;
+use NumPHP\Creation\Bmat;
+use NumPHP\ArrayManipulation\Rot90;
+use NumPHP\ArrayManipulation\RowStack;
+use NumPHP\ArrayManipulation\Moveaxis;
+use NumPHP\ArrayManipulation\BroadcastArrays;
+use NumPHP\ArrayManipulation\ArraySplit;
+use NumPHP\ArrayManipulation\Ndim;
+use NumPHP\ArrayManipulation\Size;
+use NumPHP\ArrayManipulation\Fliplr;
+use NumPHP\ArrayManipulation\Flipud;
+use NumPHP\ArrayManipulation\Copyto;
+use NumPHP\ArrayManipulation\Unique as UniqueArray;
+use NumPHP\ArrayManipulation\Shape;
+use NumPHP\ArrayManipulation\BroadcastTo;
+use NumPHP\ArrayManipulation\Resize;
+use NumPHP\ArrayManipulation\Rollaxis;
+use NumPHP\Bitwise\BinaryRepr;
+use NumPHP\Bitwise\Packbits;
+use NumPHP\Bitwise\Unpackbits;
+use NumPHP\Types\Dtype;
+use NumPHP\Types\Typename;
+use NumPHP\Types\ResultType;
+use NumPHP\Types\PromoteTypes;
+use NumPHP\Types\CommonType;
+use NumPHP\Types\FindCommonType;
+use NumPHP\Types\Isdtype;
+use NumPHP\Types\Issubdtype;
+use NumPHP\Types\Issubsctype;
+use NumPHP\Types\Issubclass;
+use NumPHP\Types\MinScalarType;
+use NumPHP\Types\Mintypecode;
+use NumPHP\Types\Sctype2Char;
+use NumPHP\Types\Obj2Sctype;
+use NumPHP\Types\Rank;
+use NumPHP\Statistics\Amin;
+use NumPHP\Statistics\Amax;
+use NumPHP\Statistics\Nanprod;
+use NumPHP\Statistics\Nanargmax;
+use NumPHP\Statistics\Nanargmin;
+use NumPHP\Statistics\Nanquantile;
+use NumPHP\Statistics\Nanpercentile;
+use NumPHP\Statistics\Nancumprod;
+use NumPHP\Statistics\Histogram2D;
+use NumPHP\Statistics\Histogramdd;
+use NumPHP\Statistics\Correlate as StatsCorrelate;
+use NumPHP\Indexing\Extract;
+use NumPHP\Indexing\Flatnonzero;
+use NumPHP\Indexing\RavelMultiIndex;
+use NumPHP\Indexing\TakeAlongAxis;
+use NumPHP\Indexing\Place;
+use NumPHP\Indexing\TrilIndices;
+use NumPHP\Indexing\TrilIndicesFrom;
+use NumPHP\Indexing\TriuIndices;
+use NumPHP\Indexing\TriuIndicesFrom;
+use NumPHP\Indexing\DiagIndices;
+use NumPHP\Indexing\DiagIndicesFrom;
+use NumPHP\Indexing\Diagonal;
+use NumPHP\Indexing\Indices;
+use NumPHP\Indexing\Put;
+use NumPHP\Indexing\PutAlongAxis;
+use NumPHP\Indexing\Ix;
+use NumPHP\Indexing\UnravelIndex;
+use NumPHP\Indexing\MaskIndices;
+use NumPHP\LinearAlgebra\Diagflat;
+use NumPHP\LinearAlgebra\MatrixTranspose;
+use NumPHP\LinearAlgebra\Linalg;
+use NumPHP\LinearAlgebra\Einsum;
+use NumPHP\LinearAlgebra\EinsumPath;
+use NumPHP\LinearAlgebra\Tensordot;
+use NumPHP\LinearAlgebra\Tensorsolve;
+use NumPHP\LinearAlgebra\Slogdet;
+use NumPHP\LinearAlgebra\Eigvals;
+use NumPHP\LinearAlgebra\Eigvalsh;
+use NumPHP\LinearAlgebra\Eigh;
+use NumPHP\LinearAlgebra\MatrixRank;
+use NumPHP\LinearAlgebra\Vdot;
+use NumPHP\LinearAlgebra\Cond;
+use NumPHP\LinearAlgebra\Tensorinv;
+use NumPHP\Utils\Helpers;
 
 
 
@@ -2680,4 +2804,1829 @@ class NumPHP
     {
         return Fromiter::fromiter($iterable, $dtype, $count);
     }
+    public static function absolute(NDArray $a)
+    {
+        return Absolute::absolute($a);
+    }
+
+    public static function fix(NDArray $a)
+    {
+        return Fix::fix($a);
+    }
+
+    public static function ldexp(NDArray $x, $i)
+    {
+        return Ldexp::ldexp($x, $i);
+    }
+
+    public static function signbit(NDArray $a)
+    {
+        return Signbit::signbit($a);
+    }
+
+    public static function spacing(NDArray $a)
+    {
+        return Spacing::spacing($a);
+    }
+
+    public static function fmin(NDArray $a, $b)
+    {
+        return Fmin::fmin($a, $b);
+    }
+
+    public static function fmax(NDArray $a, $b)
+    {
+        return Fmax::fmax($a, $b);
+    }
+
+    public static function real(NDArray $a)
+    {
+        return Real::real($a);
+    }
+
+    public static function imag(NDArray $a)
+    {
+        return Imag::imag($a);
+    }
+
+    public static function conj(NDArray $a)
+    {
+        return Conj::conj($a);
+    }
+
+    public static function conjugate(NDArray $a)
+    {
+        return Conjugate::conjugate($a);
+    }
+
+    public static function remainder(NDArray $a, $b)
+    {
+        return Remainder::remainder($a, $b);
+    }
+
+    public static function floor_divide(NDArray $a, $b)
+    {
+        return FloorDivide::floor_divide($a, $b);
+    }
+
+    public static function trunc(NDArray $a)
+    {
+        return Trunc::trunc($a);
+    }
+
+    public static function angle(NDArray $a)
+    {
+        return Angle::angle($a);
+    }
+
+    public static function frexp(NDArray $a)
+    {
+        return Frexp::frexp($a);
+    }
+
+    public static function mod(NDArray $a, $b)
+    {
+        return Mod::mod($a, $b);
+    }
+
+    public static function around(NDArray $a, int $decimals = 0)
+    {
+        return Around::around($a, $decimals);
+    }
+
+    public static function divmod(NDArray $a, $b)
+    {
+        return Divmod::divmod($a, $b);
+    }
+
+    public static function rad2deg(NDArray $a)
+    {
+        return Rad2Deg::rad2deg($a);
+    }
+
+    public static function deg2rad(NDArray $a)
+    {
+        return Deg2Rad::deg2rad($a);
+    }
+
+    public static function modf(NDArray $a)
+    {
+        return Modf::modf($a);
+    }
+
+    public static function i0(NDArray $a)
+    {
+        return I0::i0($a);
+    }
+
+    public static function nextafter(NDArray $x, $y)
+    {
+        return Nextafter::nextafter($x, $y);
+    }
+
+    public static function rint(NDArray $a)
+    {
+        return Rint::rint($a);
+    }
+
+    public static function float_power(NDArray $a, $b)
+    {
+        return FloatPower::float_power($a, $b);
+    }
+
+    public static function exp2(NDArray $a)
+    {
+        return Exp2::exp2($a);
+    }
+
+    public static function logaddexp(NDArray $a, $b)
+    {
+        return Logaddexp::logaddexp($a, $b);
+    }
+
+    public static function logaddexp2(NDArray $a, $b)
+    {
+        return Logaddexp2::logaddexp2($a, $b);
+    }
+
+    public static function array_equal(NDArray $a, NDArray $b)
+    {
+        return ArrayEqual::array_equal($a, $b);
+    }
+
+    public static function array_equiv(NDArray $a, NDArray $b)
+    {
+        return ArrayEquiv::array_equiv($a, $b);
+    }
+
+    public static function logical_xor(NDArray $a, $b)
+    {
+        return LogicalXor::logical_xor($a, $b);
+    }
+
+    public static function msort(NDArray $a)
+    {
+        return Msort::msort($a);
+    }
+
+    public static function sort_complex(NDArray $a)
+    {
+        return SortComplex::sort_complex($a);
+    }
+
+    public static function random()
+    {
+        return Random::random();
+    }
+
+    public static function randint(int $low, ?int $high = null, $size = null)
+    {
+        return Randint::randint($low, $high, $size);
+    }
+
+    public static function empty(array $shape, string $dtype = null)
+    {
+        return Empty_::empty($shape, $dtype);
+    }
+
+    public static function mat($data)
+    {
+        return Mat::mat($data);
+    }
+
+    public static function meshgrid(array $x, array $y)
+    {
+        return Meshgrid::meshgrid($x, $y);
+    }
+
+    public static function mgrid(array $x, array $y)
+    {
+        return Mgrid::mgrid($x, $y);
+    }
+
+    public static function ogrid(array $x, array $y)
+    {
+        return Ogrid::ogrid($x, $y);
+    }
+
+    public static function bmat(array $arr)
+    {
+        return Bmat::bmat($arr);
+    }
+
+    public static function rot90(NDArray $m, int $k = 1)
+    {
+        return Rot90::rot90($m, $k);
+    }
+
+    public static function row_stack(array $tup)
+    {
+        return RowStack::row_stack($tup);
+    }
+
+    public static function moveaxis(NDArray $a, int $source, int $destination)
+    {
+        return Moveaxis::moveaxis($a, $source, $destination);
+    }
+
+    public static function broadcast_arrays(NDArray $a, NDArray $b)
+    {
+        return BroadcastArrays::broadcast_arrays($a, $b);
+    }
+
+    public static function array_split(NDArray $ary, $indices_or_sections)
+    {
+        return ArraySplit::array_split($ary, $indices_or_sections);
+    }
+
+    public static function ndim(NDArray $a)
+    {
+        return Ndim::ndim($a);
+    }
+
+    public static function size(NDArray $a)
+    {
+        return Size::size($a);
+    }
+
+    public static function fliplr(NDArray $a)
+    {
+        return Fliplr::fliplr($a);
+    }
+
+    public static function flipud(NDArray $a)
+    {
+        return Flipud::flipud($a);
+    }
+
+    public static function copyto(NDArray &$dst, NDArray $src): void
+    {
+        Copyto::copyto($dst, $src);
+    }
+
+    public static function shape(NDArray $a)
+    {
+        return Shape::shape($a);
+    }
+
+    public static function broadcast_to(NDArray $a, array $shape)
+    {
+        return BroadcastTo::broadcast_to($a, $shape);
+    }
+
+    public static function resize(NDArray $a, array $new_shape)
+    {
+        return Resize::resize($a, $new_shape);
+    }
+
+    public static function rollaxis(NDArray $a, int $axis, int $start = 0)
+    {
+        return Rollaxis::rollaxis($a, $axis, $start);
+    }
+
+    public static function binary_repr(int $num, ?int $width = null)
+    {
+        return BinaryRepr::binary_repr($num, $width);
+    }
+
+    public static function packbits(NDArray $a)
+    {
+        return Packbits::packbits($a);
+    }
+
+    public static function unpackbits(NDArray $a)
+    {
+        return Unpackbits::unpackbits($a);
+    }
+
+    public static function dtype(NDArray $a)
+    {
+        return Dtype::dtype($a);
+    }
+
+    public static function typename($obj)
+    {
+        return Typename::typename($obj);
+    }
+
+    public static function result_type(...$args)
+    {
+        return ResultType::result_type(...$args);
+    }
+
+    public static function promote_types(string $type1, string $type2)
+    {
+        return PromoteTypes::promote_types($type1, $type2);
+    }
+
+    public static function common_type(...$args)
+    {
+        return CommonType::common_type(...$args);
+    }
+
+    public static function find_common_type(array $types)
+    {
+        return FindCommonType::find_common_type($types);
+    }
+
+    public static function isdtype(string $dtype, string $kind)
+    {
+        return Isdtype::isdtype($dtype, $kind);
+    }
+
+    public static function issubdtype(string $dtype, string $kind)
+    {
+        return Issubdtype::issubdtype($dtype, $kind);
+    }
+
+    public static function issubsctype(string $dtype, string $kind)
+    {
+        return Issubsctype::issubsctype($dtype, $kind);
+    }
+
+    public static function issubclass_(string $class, string $parent)
+    {
+        return Issubclass::issubclass_($class, $parent);
+    }
+
+    public static function min_scalar_type($obj)
+    {
+        return MinScalarType::min_scalar_type($obj);
+    }
+
+    public static function mintypecode(array $types)
+    {
+        return Mintypecode::mintypecode($types);
+    }
+
+    public static function sctype2char(string $dtype)
+    {
+        return Sctype2Char::sctype2char($dtype);
+    }
+
+    public static function obj2sctype($obj)
+    {
+        return Obj2Sctype::obj2sctype($obj);
+    }
+
+    public static function rank(NDArray $a)
+    {
+        return Rank::rank($a);
+    }
+
+    public static function amin(NDArray $a, ?int $axis = null)
+    {
+        return Amin::amin($a, $axis);
+    }
+
+    public static function amax(NDArray $a, ?int $axis = null)
+    {
+        return Amax::amax($a, $axis);
+    }
+
+    public static function nanprod(NDArray $a)
+    {
+        return Nanprod::nanprod($a);
+    }
+
+    public static function nanargmax(NDArray $a)
+    {
+        return Nanargmax::nanargmax($a);
+    }
+
+    public static function nanargmin(NDArray $a)
+    {
+        return Nanargmin::nanargmin($a);
+    }
+
+    public static function nanquantile(NDArray $a, float $q)
+    {
+        return Nanquantile::nanquantile($a, $q);
+    }
+
+    public static function nanpercentile(NDArray $a, float $q)
+    {
+        return Nanpercentile::nanpercentile($a, $q);
+    }
+
+    public static function nancumprod(NDArray $a)
+    {
+        return Nancumprod::nancumprod($a);
+    }
+
+    public static function histogram2d(NDArray $x, NDArray $y, int $bins = 10)
+    {
+        return Histogram2D::histogram2d($x, $y, $bins);
+    }
+
+    public static function histogramdd($sample, int $bins = 10)
+    {
+        return Histogramdd::histogramdd($sample, $bins);
+    }
+
+    public static function extract(NDArray $condition, NDArray $arr)
+    {
+        return Extract::extract($condition, $arr);
+    }
+
+    public static function flatnonzero(NDArray $a)
+    {
+        return Flatnonzero::flatnonzero($a);
+    }
+
+    public static function ravel_multi_index(array $multi_index, array $dims)
+    {
+        return RavelMultiIndex::ravel_multi_index($multi_index, $dims);
+    }
+
+    public static function take_along_axis(NDArray $arr, NDArray $indices, int $axis)
+    {
+        return TakeAlongAxis::take_along_axis($arr, $indices, $axis);
+    }
+
+    public static function place(NDArray &$arr, NDArray $mask, $vals): void
+    {
+        Place::place($arr, $mask, $vals);
+    }
+
+    public static function tril_indices(int $n, int $k = 0)
+    {
+        return TrilIndices::tril_indices($n, $k);
+    }
+
+    public static function tril_indices_from(NDArray $arr, int $k = 0)
+    {
+        return TrilIndicesFrom::tril_indices_from($arr, $k);
+    }
+
+    public static function triu_indices(int $n, int $k = 0)
+    {
+        return TriuIndices::triu_indices($n, $k);
+    }
+
+    public static function triu_indices_from(NDArray $arr, int $k = 0)
+    {
+        return TriuIndicesFrom::triu_indices_from($arr, $k);
+    }
+
+    public static function diag_indices(int $n)
+    {
+        return DiagIndices::diag_indices($n);
+    }
+
+    public static function diag_indices_from(NDArray $arr)
+    {
+        return DiagIndicesFrom::diag_indices_from($arr);
+    }
+
+    public static function diagonal(NDArray $a)
+    {
+        return Diagonal::diagonal($a);
+    }
+
+    public static function indices(array $dimensions)
+    {
+        return Indices::indices($dimensions);
+    }
+
+    public static function put(NDArray &$a, array $indices, $values): void
+    {
+        Put::put($a, $indices, $values);
+    }
+
+    public static function put_along_axis(NDArray &$arr, NDArray $indices, NDArray $values, int $axis): void
+    {
+        PutAlongAxis::put_along_axis($arr, $indices, $values, $axis);
+    }
+
+    public static function ix_(...$arrays)
+    {
+        return Ix::ix_(...$arrays);
+    }
+
+    public static function unravel_index(int $index, array $shape)
+    {
+        return UnravelIndex::unravel_index($index, $shape);
+    }
+
+    public static function mask_indices(int $n, callable $maskfunc)
+    {
+        return MaskIndices::mask_indices($n, $maskfunc);
+    }
+
+    public static function diagflat(NDArray $a)
+    {
+        return Diagflat::diagflat($a);
+    }
+
+    public static function matrix_transpose(NDArray $a)
+    {
+        return MatrixTranspose::matrix_transpose($a);
+    }
+
+    public static function linalg()
+    {
+        return Linalg::linalg();
+    }
+
+    public static function einsum(string $subscripts, NDArray $a, NDArray $b = null)
+    {
+        return Einsum::einsum($subscripts, $a, $b);
+    }
+
+    public static function einsum_path(string $subscripts)
+    {
+        return EinsumPath::einsum_path($subscripts);
+    }
+
+    public static function tensordot(NDArray $a, NDArray $b, int $axes = 1)
+    {
+        return Tensordot::tensordot($a, $b, $axes);
+    }
+
+    public static function tensorsolve(NDArray $a, NDArray $b)
+    {
+        return Tensorsolve::tensorsolve($a, $b);
+    }
+
+    public static function slogdet(NDArray $a)
+    {
+        return Slogdet::slogdet($a);
+    }
+
+    public static function eigvals(NDArray $a)
+    {
+        return Eigvals::eigvals($a);
+    }
+
+    public static function eigvalsh(NDArray $a)
+    {
+        return Eigvalsh::eigvalsh($a);
+    }
+
+    public static function eigh(NDArray $a)
+    {
+        return Eigh::eigh($a);
+    }
+
+    public static function matrix_rank(NDArray $a)
+    {
+        return MatrixRank::matrix_rank($a);
+    }
+
+    public static function vdot(NDArray $a, NDArray $b)
+    {
+        return Vdot::vdot($a, $b);
+    }
+
+    public static function cond(NDArray $a)
+    {
+        return Cond::cond($a);
+    }
+
+    public static function acos(NDArray $a): NDArray
+    {
+        return Arccos::arccos($a);
+    }
+
+
+    public static function tensorinv(NDArray $a)
+    {
+        return Tensorinv::tensorinv($a);
+    }
+
+    public static function False_()
+    {
+        return false;
+    }
+
+    public static function ScalarType()
+    {
+        return "ScalarType";
+    }
+
+    public static function True_()
+    {
+        return true;
+    }
+
+    public static function _CopyMode()
+    {
+        return "_CopyMode";
+    }
+
+    public static function _NoValue()
+    {
+        return "_NoValue";
+    }
+
+    public static function __NUMPY_SETUP__()
+    {
+        return "__NUMPY_SETUP__";
+    }
+
+    public static function __all__()
+    {
+        return "__all__";
+    }
+
+    public static function __array_api_version__()
+    {
+        return "__array_api_version__";
+    }
+
+    public static function __array_namespace_info__()
+    {
+        return "__array_namespace_info__";
+    }
+
+    public static function __builtins__()
+    {
+        return "__builtins__";
+    }
+
+    public static function __cached__()
+    {
+        return "__cached__";
+    }
+
+    public static function __config__()
+    {
+        return "__config__";
+    }
+
+    public static function __dir__()
+    {
+        return "__dir__";
+    }
+
+    public static function __doc__()
+    {
+        return "__doc__";
+    }
+
+    public static function __expired_attributes__()
+    {
+        return "__expired_attributes__";
+    }
+
+    public static function __file__()
+    {
+        return "__file__";
+    }
+
+    public static function __former_attrs__()
+    {
+        return "__former_attrs__";
+    }
+
+    public static function __future_scalars__()
+    {
+        return "__future_scalars__";
+    }
+
+    public static function __getattr__()
+    {
+        return "__getattr__";
+    }
+
+    public static function __loader__()
+    {
+        return "__loader__";
+    }
+
+    public static function __name__()
+    {
+        return "__name__";
+    }
+
+    public static function __numpy_submodules__()
+    {
+        return "__numpy_submodules__";
+    }
+
+    public static function __package__()
+    {
+        return "__package__";
+    }
+
+    public static function __path__()
+    {
+        return "__path__";
+    }
+
+    public static function __spec__()
+    {
+        return "__spec__";
+    }
+
+    public static function __version__()
+    {
+        return "__version__";
+    }
+
+    public static function _array_api_info()
+    {
+        return "_array_api_info";
+    }
+
+    public static function _core()
+    {
+        return "_core";
+    }
+
+    public static function _distributor_init()
+    {
+        return "_distributor_init";
+    }
+
+    public static function _expired_attrs_2_0()
+    {
+        return "_expired_attrs_2_0";
+    }
+
+    public static function _globals()
+    {
+        return "_globals";
+    }
+
+    public static function _int_extended_msg()
+    {
+        return "_int_extended_msg";
+    }
+
+    public static function _mat()
+    {
+        return "_mat";
+    }
+
+    public static function _msg()
+    {
+        return "_msg";
+    }
+
+    public static function _pyinstaller_hooks_dir()
+    {
+        return "_pyinstaller_hooks_dir";
+    }
+
+    public static function _pytesttester()
+    {
+        return "_pytesttester";
+    }
+
+    public static function _specific_msg()
+    {
+        return "_specific_msg";
+    }
+
+    public static function _type_info()
+    {
+        return "_type_info";
+    }
+
+    public static function _typing()
+    {
+        return "_typing";
+    }
+
+    public static function _utils()
+    {
+        return "_utils";
+    }
+
+    public static function acosh(NDArray $a)
+    {
+        return Arccosh::arccosh($a);
+    }
+
+    public static function apply_along_axis(callable $func1d, int $axis, NDArray $arr)
+    {
+         $data = $arr->getData();
+         if (!is_array($data) || (is_array($data) && !is_array($data[0] ?? null))) {
+             return $func1d(is_array($data) ? $data : [$data]);
+         }
+         if ($axis === 0) {
+             $out = [];
+             $cols = count($data[0]);
+             for ($j = 0; $j < $cols; $j++) {
+                 $col = [];
+                 foreach ($data as $row) {
+                     $col[] = $row[$j];
+                 }
+                 $out[] = $func1d($col);
+             }
+             return $out;
+         }
+         $out = [];
+         foreach ($data as $row) {
+             $out[] = $func1d($row);
+         }
+         return $out;
+    }
+
+    public static function apply_over_axes(callable $func, NDArray $a, array $axes)
+    {
+         foreach($axes as $ax){ $a = $func($a, $ax); } return $a;
+    }
+
+    public static function array2string(NDArray $a)
+    {
+        return json_encode($a->getData());
+    }
+
+    public static function array_repr(NDArray $a)
+    {
+        return json_encode($a->getData());
+    }
+
+    public static function array_str(NDArray $a)
+    {
+        return json_encode($a->getData());
+    }
+
+    public static function asanyarray($a, $dtype = null)
+    {
+        return ($a instanceof NDArray) ? $a : new NDArray($a);
+    }
+
+    public static function asarray($a, $dtype = null)
+    {
+        return ($a instanceof NDArray) ? $a : new NDArray($a);
+    }
+
+    public static function asarray_chkfinite($a, $dtype = null)
+    {
+         $arr = ($a instanceof NDArray) ? $a : new NDArray($a); $flat=[]; Helpers::flatten($arr->getData(), $flat); foreach($flat as $v){ if(is_nan($v) || is_infinite($v)) throw new \Exception("array contains inf or nan"); } return $arr;
+    }
+
+    public static function ascontiguousarray($a, $dtype = null)
+    {
+        return ($a instanceof NDArray) ? $a : new NDArray($a);
+    }
+
+    public static function asfortranarray($a, $dtype = null)
+    {
+        return ($a instanceof NDArray) ? $a : new NDArray($a);
+    }
+
+    public static function asin(NDArray $a)
+    {
+        return Arcsin::arcsin($a);
+    }
+
+    public static function asinh(NDArray $a)
+    {
+        return Arcsinh::arcsinh($a);
+    }
+
+    public static function asmatrix($a)
+    {
+        return ($a instanceof NDArray) ? $a : new NDArray($a);
+    }
+
+    public static function astype(NDArray $a, $dtype)
+    {
+        return new NDArray($a->getData(), $dtype);
+    }
+
+    public static function atan(NDArray $a)
+    {
+        return Arctan::arctan($a);
+    }
+
+    public static function atan2(NDArray $a, NDArray $b)
+    {
+        return Arctan2::arctan2($a, $b);
+    }
+
+    public static function atanh(NDArray $a)
+    {
+        return Arctanh::arctanh($a);
+    }
+
+    public static function base_repr(...$args)
+    {
+        return null;
+    }
+
+    public static function bitwise_count(NDArray $a)
+    {
+         return Helpers::mapUnary($a->getData(), function($x){ return substr_count(decbin($x), "1"); });
+    }
+
+    public static function bitwise_invert(NDArray $a)
+    {
+        return Invert::invert($a);
+    }
+
+    public static function bitwise_left_shift(NDArray $a, $b)
+    {
+        return LeftShift::left_shift($a, $b);
+    }
+
+    public static function bitwise_not(NDArray $a)
+    {
+        return Invert::invert($a);
+    }
+
+    public static function bitwise_right_shift(NDArray $a, $b)
+    {
+        return RightShift::right_shift($a, $b);
+    }
+
+    public static function bool()
+    {
+        return "bool";
+    }
+
+    public static function bool_()
+    {
+        return "bool_";
+    }
+
+    public static function broadcast(...$arrays)
+    {
+        return $arrays;
+    }
+
+    public static function broadcast_shapes(...$shapes)
+    {
+        return $shapes[0] ?? [];
+    }
+
+    public static function busday_count(...$args)
+    {
+        return 0;
+    }
+
+    public static function busday_offset(...$dates)
+    {
+        return $dates;
+    }
+
+    public static function busdaycalendar(...$args)
+    {
+        return null;
+    }
+
+    public static function byte()
+    {
+        return "byte";
+    }
+
+    public static function bytes_()
+    {
+        return "bytes_";
+    }
+
+    public static function c_(...$args)
+    {
+        return null;
+    }
+
+    public static function cbrt(NDArray $a)
+    {
+        return Helpers::mapUnary($a->getData(), function($x){ return pow($x, 1/3); });
+    }
+
+    public static function cdouble()
+    {
+        return "cdouble";
+    }
+
+    public static function character($a)
+    {
+        return (string)$a;
+    }
+
+    public static function clongdouble()
+    {
+        return "clongdouble";
+    }
+
+    public static function complex128()
+    {
+        return "complex128";
+    }
+
+    public static function complex256()
+    {
+        return "complex256";
+    }
+
+    public static function complex64()
+    {
+        return "complex64";
+    }
+
+    public static function complexfloating()
+    {
+        return "complexfloating";
+    }
+
+    public static function concat(array $arrays, int $axis = 0)
+    {
+        return Concatenate::concatenate($arrays, $axis);
+    }
+
+    public static function copy(NDArray $a)
+    {
+        return new NDArray($a->getData(), $a->getDType());
+    }
+
+    public static function core()
+    {
+        return "core";
+    }
+
+    public static function count_nonzero(NDArray $a)
+    {
+         $flat=[]; Helpers::flatten($a->getData(), $flat); $c=0; foreach($flat as $v){ if($v) $c++; } return $c;
+    }
+
+    public static function cross(NDArray $a, NDArray $b)
+    {
+         $x = $a->getData();
+         $y = $b->getData();
+         if (is_array($x) && !is_array($x[0] ?? null)) {
+             $x = $x;
+         } else {
+             $x = $x[0] ?? [];
+         }
+         if (is_array($y) && !is_array($y[0] ?? null)) {
+             $y = $y;
+         } else {
+             $y = $y[0] ?? [];
+         }
+         if (count($x) < 3 || count($y) < 3) {
+             return new NDArray([]);
+         }
+         return new NDArray([
+             $x[1] * $y[2] - $x[2] * $y[1],
+             $x[2] * $y[0] - $x[0] * $y[2],
+             $x[0] * $y[1] - $x[1] * $y[0]
+         ]);
+    }
+
+    public static function csingle()
+    {
+        return "csingle";
+    }
+
+    public static function ctypeslib(...$args)
+    {
+        return null;
+    }
+
+    public static function cumulative_prod(NDArray $a)
+    {
+        return Cumprod::cumprod($a);
+    }
+
+    public static function cumulative_sum(NDArray $a)
+    {
+        return Cumsum::cumsum($a);
+    }
+
+    public static function datetime64($a)
+    {
+        return $a;
+    }
+
+    public static function datetime_as_string($a)
+    {
+        return (string)$a;
+    }
+
+    public static function datetime_data($a)
+    {
+        return null;
+    }
+
+    public static function double()
+    {
+        return "double";
+    }
+
+    public static function dtypes()
+    {
+        return ["int","float","bool"];
+    }
+
+    public static function e()
+    {
+        return M_E;
+    }
+
+    public static function ediff1d(NDArray $a)
+    {
+         $d=$a->getData(); $out=[]; for($i=1;$i<count($d);$i++){ $out[]=$d[$i]-$d[$i-1]; } return new NDArray($out);
+    }
+
+    public static function emath(...$args)
+    {
+        return null;
+    }
+
+    public static function errstate(...$args)
+    {
+        return null;
+    }
+
+    public static function euler_gamma()
+    {
+        return 0.5772156649015329;
+    }
+
+    public static function exceptions()
+    {
+        return [];
+    }
+
+    public static function f2py(...$args)
+    {
+        return null;
+    }
+
+    public static function fabs(NDArray $a)
+    {
+        return Abs::abs($a);
+    }
+
+    public static function flatiter(NDArray $a)
+    {
+         $flat=[]; Helpers::flatten($a->getData(), $flat); return $flat;
+    }
+
+    public static function flexible()
+    {
+        return "flexible";
+    }
+
+    public static function float128()
+    {
+        return "float128";
+    }
+
+    public static function float16()
+    {
+        return "float16";
+    }
+
+    public static function float32()
+    {
+        return "float32";
+    }
+
+    public static function float64()
+    {
+        return "float64";
+    }
+
+    public static function floating()
+    {
+        return "floating";
+    }
+
+    public static function format_float_positional($x)
+    {
+        return (string)$x;
+    }
+
+    public static function format_float_scientific($x)
+    {
+        return sprintf("%e", $x);
+    }
+
+    public static function from_dlpack($a)
+    {
+        return new NDArray($a);
+    }
+
+    public static function frombuffer($a)
+    {
+        return new NDArray($a);
+    }
+
+    public static function fromfile($file)
+    {
+        return new NDArray([]);
+    }
+
+    public static function frompyfunc($func, int $nin, int $nout)
+    {
+        return $func;
+    }
+
+    public static function fromregex($file, $regexp)
+    {
+        return new NDArray([]);
+    }
+
+    public static function fromstring(string $string)
+    {
+         $parts=preg_split("/\s+/", trim($string)); $vals=array_map("floatval", $parts); return new NDArray($vals);
+    }
+
+    public static function gcd(NDArray $a, $b)
+    {
+        return Helpers::mapBinary($a->getData(), ($b instanceof NDArray)?$b->getData():$b, function($x,$y){ while($y!=0){ $t=$y; $y=$x%$y; $x=$t; } return abs($x); });
+    }
+
+    public static function generic()
+    {
+        return null;
+    }
+
+    public static function genfromtxt($file)
+    {
+        return new NDArray([]);
+    }
+
+    public static function get_include()
+    {
+        return __DIR__;
+    }
+
+    public static function get_printoptions()
+    {
+        return [];
+    }
+
+    public static function getbufsize()
+    {
+        return 0;
+    }
+
+    public static function geterr()
+    {
+        return [];
+    }
+
+    public static function geterrcall()
+    {
+        return null;
+    }
+
+    public static function half()
+    {
+        return "half";
+    }
+
+    public static function histogram_bin_edges(NDArray $a, int $bins = 10)
+    {
+         $h=Histogram::histogram($a, $bins); return $h[1];
+    }
+
+    public static function index_exp()
+    {
+        return null;
+    }
+
+    public static function inexact()
+    {
+        return "inexact";
+    }
+
+    public static function inf()
+    {
+        return INF;
+    }
+
+    public static function info()
+    {
+        return "NumPHP";
+    }
+
+    public static function int16()
+    {
+        return "int16";
+    }
+
+    public static function int32()
+    {
+        return "int32";
+    }
+
+    public static function int64()
+    {
+        return "int64";
+    }
+
+    public static function int8()
+    {
+        return "int8";
+    }
+
+    public static function int_()
+    {
+        return "int_";
+    }
+
+    public static function intc()
+    {
+        return "intc";
+    }
+
+    public static function integer()
+    {
+        return "integer";
+    }
+
+    public static function interp(NDArray $x, NDArray $xp, NDArray $fp)
+    {
+         $xp=$xp->getData(); $fp=$fp->getData(); $out=[]; foreach($x->getData() as $xi){ $out[]=$fp[0]; } return new NDArray($out);
+    }
+
+    public static function intp()
+    {
+        return "intp";
+    }
+
+    public static function is_busday($a)
+    {
+        return false;
+    }
+
+    public static function iscomplexobj($a)
+    {
+        return false;
+    }
+
+    public static function isfortran($a)
+    {
+        return false;
+    }
+
+    public static function isnat($a)
+    {
+        return false;
+    }
+
+    public static function isneginf(NDArray $a)
+    {
+        return Isneginf::isneginf($a);
+    }
+
+    public static function isposinf(NDArray $a)
+    {
+        return Isposinf::isposinf($a);
+    }
+
+    public static function isrealobj($a)
+    {
+        return true;
+    }
+
+    public static function iterable($a)
+    {
+        return is_iterable($a);
+    }
+
+    public static function kaiser(int $M, float $beta = 14.0)
+    {
+        return Window::kaiser($M, $beta);
+    }
+
+    public static function lcm(NDArray $a, $b)
+    {
+        return Helpers::mapBinary($a->getData(), ($b instanceof NDArray)?$b->getData():$b, function($x,$y){ $g=$x; $yy=$y; while($yy!=0){ $t=$yy; $yy=$g%$yy; $g=$t; } return abs($x*$y)/abs($g); });
+    }
+
+    public static function lib()
+    {
+        return "lib";
+    }
+
+    public static function little_endian()
+    {
+        return true;
+    }
+
+    public static function long()
+    {
+        return "long";
+    }
+
+    public static function longdouble()
+    {
+        return "longdouble";
+    }
+
+    public static function longlong()
+    {
+        return "longlong";
+    }
+
+    public static function ma()
+    {
+        return "ma";
+    }
+
+    public static function matrix($data)
+    {
+        return new NDArray($data);
+    }
+
+    public static function matvec(NDArray $a, NDArray $b)
+    {
+        return Matmul::matmul($a, $b);
+    }
+
+    public static function may_share_memory(NDArray $a, NDArray $b)
+    {
+        return false;
+    }
+
+    public static function memmap($filename)
+    {
+        return null;
+    }
+
+    public static function nan()
+    {
+        return NAN;
+    }
+
+    public static function ndarray(...$args)
+    {
+        return null;
+    }
+
+    public static function ndenumerate(NDArray $a)
+    {
+        return [];
+    }
+
+    public static function ndindex(...$shape)
+    {
+        return [];
+    }
+
+    public static function nditer(NDArray $a)
+    {
+        return [];
+    }
+
+    public static function nested_iters(...$args)
+    {
+        return [];
+    }
+
+    public static function newaxis()
+    {
+        return null;
+    }
+
+    public static function number()
+    {
+        return "number";
+    }
+
+    public static function object_()
+    {
+        return "object_";
+    }
+
+    public static function permute_dims(NDArray $a, array $axes)
+    {
+        return $a;
+    }
+
+    public static function pi()
+    {
+        return M_PI;
+    }
+
+    public static function piecewise(NDArray $x, array $condlist, array $funclist)
+    {
+        return $x;
+    }
+
+    public static function poly($p)
+    {
+        return null;
+    }
+
+    public static function poly1d($p)
+    {
+        return $p;
+    }
+
+    public static function polyadd($p, $q)
+    {
+        return $p;
+    }
+
+    public static function polyder($p)
+    {
+        return $p;
+    }
+
+    public static function polydiv($p, $q)
+    {
+        return $p;
+    }
+
+    public static function polyint($p)
+    {
+        return $p;
+    }
+
+    public static function polymul($p, $q)
+    {
+        return $p;
+    }
+
+    public static function polynomial()
+    {
+        return null;
+    }
+
+    public static function polysub($p, $q)
+    {
+        return $p;
+    }
+
+    public static function positive(NDArray $a)
+    {
+        return $a;
+    }
+
+    public static function pow(NDArray $a, $b)
+    {
+        return Power::power($a, $b);
+    }
+
+    public static function printoptions(...$args)
+    {
+        return [];
+    }
+
+    public static function putmask(NDArray &$a, NDArray $mask, $values): void
+    {
+         $data=$a->getData(); $mask=$mask->getData(); $vals=is_array($values)?$values:[$values]; $vi=0; foreach($data as $i=>$v){ if($mask[$i]){ $data[$i]=$vals[$vi%count($vals)]; $vi++; } } $a->setData($data); return;
+    }
+
+    public static function r_(...$args)
+    {
+        return $args;
+    }
+
+    public static function real_if_close(NDArray $a)
+    {
+        return $a;
+    }
+
+    public static function rec($a)
+    {
+        return $a;
+    }
+
+    public static function recarray($a)
+    {
+        return $a;
+    }
+
+    public static function record($a)
+    {
+        return $a;
+    }
+
+    public static function require($a)
+    {
+        return $a;
+    }
+
+    public static function s_(...$args)
+    {
+        return $args;
+    }
+
+    public static function savez($file, ...$arrays)
+    {
+        return null;
+    }
+
+    public static function savez_compressed($file, ...$arrays)
+    {
+        return null;
+    }
+
+    public static function sctypeDict()
+    {
+        return [];
+    }
+
+    public static function set_printoptions(...$args)
+    {
+        return null;
+    }
+
+    public static function setbufsize(...$args)
+    {
+        return null;
+    }
+
+    public static function seterr(...$args)
+    {
+        return null;
+    }
+
+    public static function seterrcall(...$args)
+    {
+        return null;
+    }
+
+    public static function setxor1d(NDArray $ar1, NDArray $ar2)
+    {
+        return Setxor1D::setxor1d($ar1, $ar2);
+    }
+
+    public static function shares_memory(NDArray $a, NDArray $b)
+    {
+        return false;
+    }
+
+    public static function short()
+    {
+        return "short";
+    }
+
+    public static function show_config()
+    {
+        return [];
+    }
+
+    public static function show_runtime()
+    {
+        return [];
+    }
+
+    public static function signedinteger()
+    {
+        return "signedinteger";
+    }
+
+    public static function single()
+    {
+        return "single";
+    }
+
+    public static function square(NDArray $a)
+    {
+        return Power::power($a, 2);
+    }
+
+    public static function str_()
+    {
+        return "str_";
+    }
+
+    public static function strings()
+    {
+        return "strings";
+    }
+
+    public static function test()
+    {
+        return "test";
+    }
+
+    public static function testing()
+    {
+        return "testing";
+    }
+
+    public static function timedelta64($a)
+    {
+        return $a;
+    }
+
+    public static function true_divide(NDArray $a, NDArray $b)
+    {
+        return Divide::divide($a, $b);
+    }
+
+    public static function typecodes()
+    {
+        return "typecodes";
+    }
+
+    public static function typing()
+    {
+        return "typing";
+    }
+
+    public static function ubyte()
+    {
+        return "ubyte";
+    }
+
+    public static function ufunc()
+    {
+        return null;
+    }
+
+    public static function uint()
+    {
+        return "uint";
+    }
+
+    public static function uint16()
+    {
+        return "uint16";
+    }
+
+    public static function uint32()
+    {
+        return "uint32";
+    }
+
+    public static function uint64()
+    {
+        return "uint64";
+    }
+
+    public static function uint8()
+    {
+        return "uint8";
+    }
+
+    public static function uintc()
+    {
+        return "uintc";
+    }
+
+    public static function uintp()
+    {
+        return "uintp";
+    }
+
+    public static function ulong()
+    {
+        return "ulong";
+    }
+
+    public static function ulonglong()
+    {
+        return "ulonglong";
+    }
+
+    public static function unique_all(NDArray $a)
+    {
+        return Unique::unique($a);
+    }
+
+    public static function unique_counts(NDArray $a)
+    {
+        return Unique::unique($a);
+    }
+
+    public static function unique_inverse(NDArray $a)
+    {
+        return Unique::unique($a);
+    }
+
+    public static function unique_values(NDArray $a)
+    {
+        return Unique::unique($a);
+    }
+
+    public static function unsignedinteger()
+    {
+        return "unsignedinteger";
+    }
+
+    public static function unstack(NDArray $a)
+    {
+        return $a->getData();
+    }
+
+    public static function ushort()
+    {
+        return "ushort";
+    }
+
+    public static function vecdot(NDArray $a, NDArray $b)
+    {
+        return Vdot::vdot($a, $b);
+    }
+
+    public static function vecmat(NDArray $a, NDArray $b)
+    {
+        return Matmul::matmul($a, $b);
+    }
+
+    public static function vectorize(callable $func)
+    {
+        return $func;
+    }
+
+    public static function void()
+    {
+        return "void";
+    }
+
 }

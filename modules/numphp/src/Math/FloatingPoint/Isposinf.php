@@ -3,18 +3,13 @@
 namespace NumPHP\Math\FloatingPoint;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Isposinf
 {
-    /**
-     * isposinf
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function isposinf(...$args)
+    public static function isposinf(NDArray $a): NDArray
     {
-        // TODO: Implement isposinf
-        throw new \Exception("isposinf not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return is_infinite($x) && $x > 0; });
+        return new NDArray($data, 'bool');
     }
 }

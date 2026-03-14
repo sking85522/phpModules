@@ -19,11 +19,12 @@ class Split
         $data = $ary->getData();
         $shape = $ary->getShape();
         
-        if ($axis !== 0) {
-            throw new \Exception("Split currently only implemented for axis 0");
+        $rank = count($shape);
+        if ($axis < 0 || $axis >= $rank) {
+            throw new \InvalidArgumentException("axis out of bounds");
         }
 
-        $total = $shape[0];
+        $total = $shape[$axis];
         $sections = [];
         $dtype = $ary->getDtype();
 
@@ -34,27 +35,57 @@ class Split
             }
             $chunkSize = $total / $n;
             // array_chunk preserves keys by default false, which is what we want for re-indexing 0..N
-            $chunks = array_chunk($data, $chunkSize);
+            $chunks = self::splitData($data, $axis, $chunkSize);
             foreach ($chunks as $c) {
                 $sections[] = new NDArray($c, $dtype);
             }
         } elseif (is_array($indices_or_sections)) {
-            // Split at specific indices
-            // e.g. [2, 5] means ary[:2], ary[2:5], ary[5:]
-            $last = 0;
-            foreach ($indices_or_sections as $idx) {
-                $length = $idx - $last;
-                $slice = array_slice($data, $last, $length);
-                $sections[] = new NDArray($slice, $dtype);
-                $last = $idx;
+            $indices = $indices_or_sections;
+            $chunks = self::splitDataByIndices($data, $axis, $indices);
+            foreach ($chunks as $c) {
+                $sections[] = new NDArray($c, $dtype);
             }
-            // Remaining
-            $slice = array_slice($data, $last);
-            $sections[] = new NDArray($slice, $dtype);
         } else {
             throw new \InvalidArgumentException("indices_or_sections must be int or array of ints");
         }
 
         return $sections;
+    }
+
+    private static function splitData($data, int $axis, int $chunkSize): array
+    {
+        if ($axis === 0) {
+            return array_chunk($data, $chunkSize);
+        }
+        $out = [];
+        $numChunks = intdiv(count($data[0]), $chunkSize);
+        for ($c = 0; $c < $numChunks; $c++) {
+            $chunk = [];
+            foreach ($data as $row) {
+                $chunk[] = array_slice($row, $c * $chunkSize, $chunkSize);
+            }
+            $out[] = $chunk;
+        }
+        return $out;
+    }
+
+    private static function splitDataByIndices($data, int $axis, array $indices): array
+    {
+        $out = [];
+        $last = 0;
+        $indices[] = ($axis === 0) ? count($data) : count($data[0]);
+        foreach ($indices as $idx) {
+            if ($axis === 0) {
+                $out[] = array_slice($data, $last, $idx - $last);
+            } else {
+                $chunk = [];
+                foreach ($data as $row) {
+                    $chunk[] = array_slice($row, $last, $idx - $last);
+                }
+                $out[] = $chunk;
+            }
+            $last = $idx;
+        }
+        return $out;
     }
 }

@@ -2,19 +2,12 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class PromoteTypes
 {
-    /**
-     * promote_types
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function promote_types(...$args)
+    public static function promote_types(string $type1, string $type2): string
     {
-        // TODO: Implement promote_types
-        throw new \Exception("promote_types not implemented yet.");
+        if ($type1 === 'float' || $type2 === 'float') return 'float';
+        if ($type1 === 'bool' && $type2 === 'bool') return 'bool';
+        return 'int';
     }
 }

@@ -6,15 +6,9 @@ use NumPHP\Core\NDArray;
 
 class Flipud
 {
-    /**
-     * flipud
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function flipud(...$args)
+    public static function flipud(NDArray $a): NDArray
     {
-        // TODO: Implement flipud
-        throw new \Exception("flipud not implemented yet.");
+        $data = array_reverse($a->getData());
+        return new NDArray($data);
     }
 }

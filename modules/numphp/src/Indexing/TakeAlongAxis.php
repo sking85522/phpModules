@@ -6,15 +6,32 @@ use NumPHP\Core\NDArray;
 
 class TakeAlongAxis
 {
-    /**
-     * take_along_axis
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function take_along_axis(...$args)
+    public static function take_along_axis(NDArray $arr, NDArray $indices, int $axis): NDArray
     {
-        // TODO: Implement take_along_axis
-        throw new \Exception("take_along_axis not implemented yet.");
+        $data = $arr->getData();
+        $idx = $indices->getData();
+        if ($axis === 0) {
+            $out = [];
+            foreach ($idx as $i => $row) {
+                $outRow = [];
+                foreach ($row as $j => $v) {
+                    $outRow[] = $data[$v][$j];
+                }
+                $out[] = $outRow;
+            }
+            return new NDArray($out);
+        }
+        if ($axis === 1) {
+            $out = [];
+            foreach ($data as $i => $row) {
+                $outRow = [];
+                foreach ($idx[$i] as $v) {
+                    $outRow[] = $row[$v];
+                }
+                $out[] = $outRow;
+            }
+            return new NDArray($out);
+        }
+        throw new \Exception('take_along_axis only supports axis 0 or 1 for 2D');
     }
 }

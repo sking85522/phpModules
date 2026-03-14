@@ -3,18 +3,13 @@
 namespace NumPHP\Math\Exponential;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Exp2
 {
-    /**
-     * exp2
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function exp2(...$args)
+    public static function exp2(NDArray $a): NDArray
     {
-        // TODO: Implement exp2
-        throw new \Exception("exp2 not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return pow(2, $x); });
+        return new NDArray($data);
     }
 }

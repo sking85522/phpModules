@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Ndim
 {
-    /**
-     * ndim
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function ndim(...$args)
+    public static function ndim(NDArray $a): int
     {
-        // TODO: Implement ndim
-        throw new \Exception("ndim not implemented yet.");
+        return count($a->getShape());
     }
 }

@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class ArrayEquiv
 {
-    /**
-     * array_equiv
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function array_equiv(...$args)
+    public static function array_equiv(NDArray $a, NDArray $b): bool
     {
-        // TODO: Implement array_equiv
-        throw new \Exception("array_equiv not implemented yet.");
+        return $a->getShape() === $b->getShape() && $a->getData() == $b->getData();
     }
 }

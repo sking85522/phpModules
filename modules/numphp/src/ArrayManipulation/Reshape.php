@@ -8,6 +8,7 @@ class Reshape
 {
     public static function reshape(NDArray $a, array $newShape): NDArray
     {
+        $newShape = self::normalizeShape($newShape);
         // First, flatten the data
         $flatNDArray = Flatten::flatten($a);
         $flatData = $flatNDArray->getData();
@@ -24,7 +25,22 @@ class Reshape
         // Reconstruct the array
         $reshapedData = self::buildShape($flatData, $newShape);
 
-        return new NDArray($reshapedData, $a->getDtype());
+        return new NDArray($reshapedData, $a->getDType());
+    }
+
+    private static function normalizeShape(array $shape): array
+    {
+        $out = [];
+        foreach ($shape as $dim) {
+            if ($dim instanceof NDArray) {
+                $dim = $dim->getData();
+            }
+            if (is_array($dim)) {
+                $dim = $dim[0] ?? 0;
+            }
+            $out[] = (int) $dim;
+        }
+        return $out;
     }
 
     private static function buildShape(array &$data, array $shape)

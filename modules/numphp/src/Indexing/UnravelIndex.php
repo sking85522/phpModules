@@ -2,19 +2,18 @@
 
 namespace NumPHP\Indexing;
 
-use NumPHP\Core\NDArray;
-
 class UnravelIndex
 {
-    /**
-     * unravel_index
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function unravel_index(...$args)
+    public static function unravel_index(int $index, array $shape): array
     {
-        // TODO: Implement unravel_index
-        throw new \Exception("unravel_index not implemented yet.");
+        $coords = [];
+        $n = count($shape);
+        for ($i = $n - 1; $i >= 0; $i--) {
+            $dim = $shape[$i];
+            $coords[$i] = $index % $dim;
+            $index = intdiv($index, $dim);
+        }
+        ksort($coords);
+        return array_values($coords);
     }
 }

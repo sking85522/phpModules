@@ -3,18 +3,13 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Imag
 {
-    /**
-     * imag
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function imag(...$args)
+    public static function imag(NDArray $a): NDArray
     {
-        // TODO: Implement imag
-        throw new \Exception("imag not implemented yet.");
+        $data = Helpers::mapUnary($a->getData(), function ($x) { return 0; });
+        return new NDArray($data);
     }
 }

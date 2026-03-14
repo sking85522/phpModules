@@ -3,18 +3,15 @@
 namespace NumPHP\ArrayManipulation;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Unique
 {
-    /**
-     * unique
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function unique(...$args)
+    public static function unique(NDArray $a): NDArray
     {
-        // TODO: Implement unique
-        throw new \Exception("unique not implemented yet.");
+        $flat = [];
+        Helpers::flatten($a->getData(), $flat);
+        $uniq = array_values(array_unique($flat));
+        return new NDArray($uniq);
     }
 }

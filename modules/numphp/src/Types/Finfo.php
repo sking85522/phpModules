@@ -12,4 +12,5 @@ class Finfo
             'max' => PHP_FLOAT_MAX,
             'min' => PHP_FLOAT_MIN
         ];
+    }
 }

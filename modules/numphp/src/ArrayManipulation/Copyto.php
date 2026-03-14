@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Copyto
 {
-    /**
-     * copyto
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function copyto(...$args)
+    public static function copyto(NDArray &$dst, NDArray $src): void
     {
-        // TODO: Implement copyto
-        throw new \Exception("copyto not implemented yet.");
+        $dst->setData($src->getData());
     }
 }

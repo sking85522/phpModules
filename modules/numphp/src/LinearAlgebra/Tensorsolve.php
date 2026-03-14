@@ -6,15 +6,8 @@ use NumPHP\Core\NDArray;
 
 class Tensorsolve
 {
-    /**
-     * tensorsolve
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function tensorsolve(...$args)
+    public static function tensorsolve(NDArray $a, NDArray $b): NDArray
     {
-        // TODO: Implement tensorsolve
-        throw new \Exception("tensorsolve not implemented yet.");
+        return Solve::solve($a, $b);
     }
 }

@@ -2,19 +2,14 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class CommonType
 {
-    /**
-     * common_type
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function common_type(...$args)
+    public static function common_type(...$args): string
     {
-        // TODO: Implement common_type
-        throw new \Exception("common_type not implemented yet.");
+        $hasFloat = false;
+        foreach ($args as $a) {
+            if (is_float($a)) { $hasFloat = true; break; }
+        }
+        return $hasFloat ? 'float' : 'int';
     }
 }

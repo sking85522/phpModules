@@ -3,18 +3,16 @@
 namespace NumPHP\Math\Exponential;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Logaddexp
 {
-    /**
-     * logaddexp
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function logaddexp(...$args)
+    public static function logaddexp(NDArray $a, $b): NDArray
     {
-        // TODO: Implement logaddexp
-        throw new \Exception("logaddexp not implemented yet.");
+        $data = Helpers::mapBinary($a->getData(), ($b instanceof NDArray) ? $b->getData() : $b, function ($x, $y) {
+            $m = max($x, $y);
+            return $m + log(exp($x - $m) + exp($y - $m));
+        });
+        return new NDArray($data);
     }
 }

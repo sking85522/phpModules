@@ -2,19 +2,17 @@
 
 namespace NumPHP\Types;
 
-use NumPHP\Core\NDArray;
-
 class ResultType
 {
-    /**
-     * result_type
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function result_type(...$args)
+    public static function result_type(...$args): string
     {
-        // TODO: Implement result_type
-        throw new \Exception("result_type not implemented yet.");
+        $hasFloat = false;
+        foreach ($args as $a) {
+            if (is_float($a)) {
+                $hasFloat = true;
+                break;
+            }
+        }
+        return $hasFloat ? 'float' : 'int';
     }
 }

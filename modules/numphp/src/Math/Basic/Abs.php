@@ -10,7 +10,7 @@ class Abs
     {
         $data = $a->getData();
         $result = self::recursiveAbs($data);
-        return new NDArray($result, $a->dtype());
+        return new NDArray($result, $a->getDType());
     }
 
     private static function recursiveAbs($data)

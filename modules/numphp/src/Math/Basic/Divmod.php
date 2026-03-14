@@ -3,18 +3,18 @@
 namespace NumPHP\Math\Basic;
 
 use NumPHP\Core\NDArray;
+use NumPHP\Utils\Helpers;
 
 class Divmod
 {
-    /**
-     * divmod
-     *
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public static function divmod(...$args)
+    public static function divmod(NDArray $a, $b): array
     {
-        // TODO: Implement divmod
-        throw new \Exception("divmod not implemented yet.");
+        $quot = Helpers::mapBinary($a->getData(), ($b instanceof NDArray) ? $b->getData() : $b, function ($x, $y) {
+            return floor($x / $y);
+        });
+        $rem = Helpers::mapBinary($a->getData(), ($b instanceof NDArray) ? $b->getData() : $b, function ($x, $y) {
+            return $x - floor($x / $y) * $y;
+        });
+        return [new NDArray($quot), new NDArray($rem)];
     }
 }
