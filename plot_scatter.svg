@@ -1,0 +1,64 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg" style="background-color: white; font-family: Arial, sans-serif;">
+<text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold">Random Scatter Plot</text>
+<text x="410" y="590" text-anchor="middle" font-size="14">X Axis</text>
+<text x="20" y="300" text-anchor="middle" font-size="14" transform="rotate(-90, 20, 300)">Y Axis</text>
+<line x1="70" y1="150" x2="750" y2="150" stroke="#e0e0e0" stroke-width="1" />
+<line x1="206" y1="50" x2="206" y2="550" stroke="#e0e0e0" stroke-width="1" />
+<line x1="70" y1="250" x2="750" y2="250" stroke="#e0e0e0" stroke-width="1" />
+<line x1="342" y1="50" x2="342" y2="550" stroke="#e0e0e0" stroke-width="1" />
+<line x1="70" y1="350" x2="750" y2="350" stroke="#e0e0e0" stroke-width="1" />
+<line x1="478" y1="50" x2="478" y2="550" stroke="#e0e0e0" stroke-width="1" />
+<line x1="70" y1="450" x2="750" y2="450" stroke="#e0e0e0" stroke-width="1" />
+<line x1="614" y1="50" x2="614" y2="550" stroke="#e0e0e0" stroke-width="1" />
+<rect x="70" y="50" width="680" height="500" fill="none" stroke="black" stroke-width="1" />
+<circle cx="518.800000" cy="352.083333" r="5.000000" fill="red" />
+<circle cx="539.200000" cy="228.977273" r="5.000000" fill="red" />
+<circle cx="253.600000" cy="437.310606" r="5.000000" fill="red" />
+<circle cx="342.000000" cy="451.515152" r="5.000000" fill="red" />
+<circle cx="675.200000" cy="120.075758" r="5.000000" fill="red" />
+<circle cx="552.800000" cy="181.628788" r="5.000000" fill="red" />
+<circle cx="471.200000" cy="356.818182" r="5.000000" fill="red" />
+<circle cx="627.600000" cy="252.651515" r="5.000000" fill="red" />
+<circle cx="301.200000" cy="375.757576" r="5.000000" fill="red" />
+<circle cx="260.400000" cy="290.530303" r="5.000000" fill="red" />
+<circle cx="444.000000" cy="162.689394" r="5.000000" fill="red" />
+<circle cx="308.000000" cy="460.984848" r="5.000000" fill="red" />
+<circle cx="682.000000" cy="470.454545" r="5.000000" fill="red" />
+<circle cx="498.400000" cy="356.818182" r="5.000000" fill="red" />
+<circle cx="512.000000" cy="309.469697" r="5.000000" fill="red" />
+<circle cx="729.600000" cy="72.727273" r="5.000000" fill="red" />
+<circle cx="110.800000" cy="134.280303" r="5.000000" fill="red" />
+<circle cx="444.000000" cy="470.454545" r="5.000000" fill="red" />
+<circle cx="695.600000" cy="451.515152" r="5.000000" fill="red" />
+<circle cx="430.400000" cy="262.121212" r="5.000000" fill="red" />
+<circle cx="634.400000" cy="527.272727" r="5.000000" fill="red" />
+<circle cx="382.800000" cy="371.022727" r="5.000000" fill="red" />
+<circle cx="376.000000" cy="214.772727" r="5.000000" fill="red" />
+<circle cx="437.200000" cy="295.265152" r="5.000000" fill="red" />
+<circle cx="206.000000" cy="157.954545" r="5.000000" fill="red" />
+<circle cx="362.400000" cy="105.871212" r="5.000000" fill="red" />
+<circle cx="675.200000" cy="172.159091" r="5.000000" fill="red" />
+<circle cx="138.000000" cy="186.363636" r="5.000000" fill="red" />
+<circle cx="90.400000" cy="498.863636" r="5.000000" fill="red" />
+<circle cx="348.800000" cy="432.575758" r="5.000000" fill="red" />
+<circle cx="573.200000" cy="451.515152" r="5.000000" fill="red" />
+<circle cx="178.800000" cy="86.931818" r="5.000000" fill="red" />
+<circle cx="750.000000" cy="167.424242" r="5.000000" fill="red" />
+<circle cx="464.400000" cy="394.696970" r="5.000000" fill="red" />
+<circle cx="444.000000" cy="276.325758" r="5.000000" fill="red" />
+<circle cx="702.400000" cy="290.530303" r="5.000000" fill="red" />
+<circle cx="70.000000" cy="205.303030" r="5.000000" fill="red" />
+<circle cx="369.200000" cy="101.136364" r="5.000000" fill="red" />
+<circle cx="226.400000" cy="243.181818" r="5.000000" fill="red" />
+<circle cx="464.400000" cy="252.651515" r="5.000000" fill="red" />
+<circle cx="396.400000" cy="120.075758" r="5.000000" fill="red" />
+<circle cx="144.800000" cy="115.340909" r="5.000000" fill="red" />
+<circle cx="729.600000" cy="72.727273" r="5.000000" fill="red" />
+<circle cx="83.600000" cy="323.674242" r="5.000000" fill="red" />
+<circle cx="546.000000" cy="210.037879" r="5.000000" fill="red" />
+<circle cx="253.600000" cy="243.181818" r="5.000000" fill="red" />
+<circle cx="131.200000" cy="77.462121" r="5.000000" fill="red" />
+<circle cx="342.000000" cy="91.666667" r="5.000000" fill="red" />
+<circle cx="117.600000" cy="124.810606" r="5.000000" fill="red" />
+<circle cx="450.800000" cy="191.098485" r="5.000000" fill="red" />
+</svg>
