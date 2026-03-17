@@ -124,3 +124,18 @@ A Computer Vision and Image Processing library using the GD extension.
 - `VisionPHP::Sobel($img)`: Applies an edge detection matrix convolution to find edges.
 
 *For functional examples, please refer to `test_visionphp.php`.*
+
+---
+
+## 9. DatasetPHP & ModelIO (AI Utilities)
+Helper libraries to load ML datasets, shuffle, split data, and serialize/deserialize trained models seamlessly.
+
+**DatasetPHP Functions:**
+- `DatasetPHP::load_csv($filepath, $target_column)`: Parses a CSV file directly into isolated Features (`X`) and Labels (`y`) arrays.
+- `DatasetPHP::train_test_split($X, $y, $test_size)`: Randomly shuffles and splits your dataset into train and test subsets (e.g. 70/30 split).
+
+**ModelIO Functions:**
+- `ModelIO::save($model, $filepath)`: Serializes an `MLPHP` or `NeuralPHP` trained model into a `.pkl` (binary file format) to save weights and biases across sessions.
+- `ModelIO::load($filepath)`: Deserializes the `.pkl` binary back into a PHP object, restoring the model to memory ready to make predictions without retraining.
+
+*For functional examples, please refer to `test_utils.php`.*
