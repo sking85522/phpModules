@@ -65,3 +65,18 @@ An advanced textual search engine implementing the BM25 scoring algorithm, token
 
 ---
 *For functional examples, please refer to `test_sciphp.php`, `test_plotphp.php`, `test_pandaphp.php`, and `test_search.php`.*
+
+---
+
+## 5. MLPHP (Scikit-Learn equivalent)
+A powerful Machine Learning library offering classification, regression, and clustering algorithms implemented in pure PHP.
+
+**Key Features & Models:**
+- `MLPHP::LinearRegression()`: Creates an Ordinary Least Squares (OLS) Linear Regression model. Supports `.fit($X, $y)` and `.predict($X)`.
+- `MLPHP::LogisticRegression($lr, $epochs)`: Creates a Logistic Regression classifier trained via Gradient Descent. Supports `.fit($X, $y)` and `.predict($X)`.
+- `MLPHP::KMeans($n_clusters, $max_iter)`: Creates a K-Means clustering algorithm. Supports `.fit($X)` and `.predict($X)`.
+- `MLPHP::StandardScaler()`: Preprocessing tool to scale and normalize datasets (`.fit_transform($X)`).
+- `MLPHP::accuracy_score($y_true, $y_pred)`: Computes classification accuracy.
+- `MLPHP::mean_squared_error($y_true, $y_pred)`: Computes MSE for regression models.
+
+*For functional examples, please refer to `test_mlphp.php`.*
