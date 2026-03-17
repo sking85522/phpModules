@@ -94,3 +94,18 @@ A lightweight Deep Learning and Neural Network framework to build Multi-Layer Pe
 - `$model->predict($X_test)`: Feeds forward the inputs and predicts outputs.
 
 *For functional examples (solving the XOR problem), please refer to `test_neuralphp.php`.*
+
+---
+
+## 7. NLPHP (NLTK equivalent)
+A robust Natural Language Processing framework in PHP. It includes tokenizers, stemming, and models for text classification.
+
+**Key Features & Models:**
+- `NLPHP::word_tokenize($text)`: Tokenizes a string into individual words and punctuation.
+- `NLPHP::sent_tokenize($text)`: Tokenizes a string into an array of sentences.
+- `NLPHP::remove_stopwords($words_array)`: Removes common English stopwords.
+- `NLPHP::stem($words_array)`: Applies a suffix-stripping stemming algorithm to a word or array of words.
+- `NLPHP::NaiveBayes()`: A simple Naive Bayes text classifier supporting `.fit($X_texts, $y_labels)` and `.predict($text)`.
+- `NLPHP::Chatbot()`: A basic rule-based intent matching chatbot logic module.
+
+*For functional examples, please refer to `test_nlphp.php`.*
