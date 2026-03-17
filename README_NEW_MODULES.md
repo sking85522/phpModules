@@ -139,3 +139,15 @@ Helper libraries to load ML datasets, shuffle, split data, and serialize/deseria
 - `ModelIO::load($filepath)`: Deserializes the `.pkl` binary back into a PHP object, restoring the model to memory ready to make predictions without retraining.
 
 *For functional examples, please refer to `test_utils.php`.*
+
+---
+
+## 10. ParallelPHP (Multithreading simulation)
+A utility library allowing parallel background execution of tasks in PHP by utilizing a managed pool of asynchronous CLI worker processes.
+
+**Key Features & Functions:**
+- `ParallelPHP::Pool($concurrency)`: Initializes a process pool with a set number of concurrent workers.
+- `$pool->submit(['ClassName', 'staticMethod'], $args_array)`: Submits a callable to the pool to be executed in the background.
+- `$pool->wait()`: Blocks execution and waits for all parallel workers to complete, returning an array of their outputs or errors.
+
+*For functional examples, please refer to `test_parallelphp.php`.*
