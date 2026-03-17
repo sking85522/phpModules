@@ -109,3 +109,18 @@ A robust Natural Language Processing framework in PHP. It includes tokenizers, s
 - `NLPHP::Chatbot()`: A basic rule-based intent matching chatbot logic module.
 
 *For functional examples, please refer to `test_nlphp.php`.*
+
+---
+
+## 8. VisionPHP (OpenCV equivalent)
+A Computer Vision and Image Processing library using the GD extension.
+
+**Key Features & Functions:**
+- `VisionPHP::imread($filepath)`: Reads an image from disk. Supports JPG, PNG, GIF.
+- `VisionPHP::create($width, $height)`: Creates a blank canvas image in memory.
+- `VisionPHP::imwrite($filepath, $img)`: Saves an image to the disk.
+- `VisionPHP::cvtColor($img, 'GRAY')`: Converts the image to grayscale.
+- `VisionPHP::GaussianBlur($img, $passes)`: Applies a Gaussian blur filter to the image.
+- `VisionPHP::Sobel($img)`: Applies an edge detection matrix convolution to find edges.
+
+*For functional examples, please refer to `test_visionphp.php`.*
