@@ -80,3 +80,17 @@ A powerful Machine Learning library offering classification, regression, and clu
 - `MLPHP::mean_squared_error($y_true, $y_pred)`: Computes MSE for regression models.
 
 *For functional examples, please refer to `test_mlphp.php`.*
+
+---
+
+## 6. NeuralPHP (TensorFlow/Keras equivalent)
+A lightweight Deep Learning and Neural Network framework to build Multi-Layer Perceptrons in pure PHP. It supports backpropagation, dense layers, activation functions, and SGD.
+
+**Key Features & Models:**
+- `NeuralPHP::Sequential()`: Initializes a sequential neural network model.
+- `$model->add(NeuralPHP::Dense($input_nodes, $output_nodes, $activation))`: Adds a fully connected layer to the model. Supported activations: `'sigmoid'`, `'relu'`.
+- `$model->compile($optimizer, $learning_rate, $loss)`: Compiles the model with the given optimizer (e.g. `'sgd'`) and loss function (e.g. `'mse'`).
+- `$model->fit($X_train, $y_train, $epochs)`: Trains the neural network using forward and backpropagation.
+- `$model->predict($X_test)`: Feeds forward the inputs and predicts outputs.
+
+*For functional examples (solving the XOR problem), please refer to `test_neuralphp.php`.*
