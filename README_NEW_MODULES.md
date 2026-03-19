@@ -151,3 +151,31 @@ A utility library allowing parallel background execution of tasks in PHP by util
 - `$pool->wait()`: Blocks execution and waits for all parallel workers to complete, returning an array of their outputs or errors.
 
 *For functional examples, please refer to `test_parallelphp.php`.*
+
+---
+
+## 11. SpeechPHP (Audio Processing)
+A core audio AI module meant for synthesizing, reading, and extracting features from raw `.wav` audio files (PCM format).
+
+**Key Features & Functions:**
+- `SpeechPHP::generate_tone($freq, $duration, $samplerate)`: Generates an array (`NDArray`) representing a sine wave of a given frequency.
+- `SpeechPHP::write($filepath, $samplerate, $data)`: Encodes a sequence of float amplitudes (-1.0 to 1.0) into a proper 16-bit PCM `.wav` binary file.
+- `SpeechPHP::read($filepath)`: Parses a `.wav` file into float amplitudes.
+- `SpeechPHP::zero_crossing_rate($data)`: A feature extraction tool calculating ZCR, used often in speech recognition to identify voiced vs unvoiced speech.
+- `SpeechPHP::rms_energy($data)`: Computes the Root-Mean-Square volume/loudness.
+
+*For functional examples, please refer to `test_speechphp.php`.*
+
+---
+
+## 12. TrainMonitorPHP (Training Visualization)
+A callback/hook module designed to connect Deep Learning models (`NeuralPHP`) with vector visualization libraries (`PlotPHP`).
+
+**Key Features & Functions:**
+- `TrainMonitorPHP::History($filepath, $record_every)`: Returns a `HistoryMonitor` callback instance. Passing this into `NeuralPHP::fit($X, $y, $epochs, $monitor)` will cause the monitor to automatically collect Mean Squared Error (MSE) statistics internally during the backpropagation loop.
+- Automatically outputs a line chart SVG at the end of the specified epochs visualizing the network's learning curve.
+
+*For functional examples, please refer to `test_monitor.php`.*
+
+---
+**This concludes the core AI & ML Ecosystem built entirely in PHP!**
